@@ -28,3 +28,5 @@ A empresa varejista também deseja visualizar qual os 5 produtos mais vendido e 
 Lembre-se que em todas as classes: cliente, funcionário, produtos e categoria deverá possuir o crud(get,put,delete e post).
 
 Extra: O sistema deverá enviar um email para o dono da empresa varejista, quando os produtos estiverem com 5 ou menos em seu estoque.
+
+O projeto deverá postado no git, então cria um repositorio e compartilhe com o email: renan.ribeiro@docente.senai.br
