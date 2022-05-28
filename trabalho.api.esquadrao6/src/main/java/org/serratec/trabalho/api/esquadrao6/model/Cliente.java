@@ -59,7 +59,7 @@ public class Cliente {
     @NotNull
     @Column(name = "cliente_cep")
     @Size(min = 8, max = 8)
-    private String clienteCPF;
+    private String clienteCep;
 
     //Relações com outras tabelas --> Verificar relações e aplicar depois
 
@@ -139,12 +139,13 @@ public class Cliente {
     public void setClienteEnderecoCompleto(String clienteEnderecoCompleto) {
         this.clienteEnderecoCompleto = clienteEnderecoCompleto;
     }
+    
+    
+    public String getClienteCep() {
+		return clienteCep;
+	}
 
-    public String getClienteCPF() {
-        return clienteCPF;
-    }
-
-    public void setClienteCPF(String clienteCPF) {
-        this.clienteCPF = clienteCPF;
-    }
+	public void setClienteCep(String clienteCep) {
+		this.clienteCep = clienteCep;
+	}
 }

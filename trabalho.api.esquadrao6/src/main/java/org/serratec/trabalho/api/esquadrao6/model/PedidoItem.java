@@ -16,7 +16,7 @@ public class PedidoItem {
 
     @NotNull
     @Column(name = "pedido_data")
-    private LocalDate clienteDataNascimento;
+    private LocalDate pedidoData;
 
     @NotNull
     @Column(name = "pedido_numero")
@@ -54,12 +54,12 @@ public class PedidoItem {
         this.pedidoId = pedidoId;
     }
 
-    public LocalDate getClienteDataNascimento() {
-        return clienteDataNascimento;
+    public LocalDate getPedidoData() {
+        return pedidoData;
     }
 
-    public void setClienteDataNascimento(LocalDate clienteDataNascimento) {
-        this.clienteDataNascimento = clienteDataNascimento;
+    public void setPedidoData(LocalDate pedidoData) {
+        this.pedidoData = pedidoData;
     }
 
     public Integer getPedidoNumero() {
