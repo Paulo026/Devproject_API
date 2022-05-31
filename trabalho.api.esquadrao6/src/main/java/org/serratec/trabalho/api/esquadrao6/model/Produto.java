@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "PRODUTO")
@@ -41,14 +42,18 @@ public class Produto {
     @Column(name = "produto_vl_unitario")
     private Double produtoValorUnitario;
 
-    //Relações com outras tabelas --> Verificar relações e aplicar depois
-    @NotNull
-    @Column(name = "categoria_id")
-    private Integer categoriaId;
+    //Relações com outras tabelas --> Relações verificadas
+    @ManyToOne
+    @JoinColumn(name = "categoria_id", referencedColumnName = "categoria_id")
+    private ProdutoCategoria produtoCategoria;
 
-    @NotNull
-    @Column(name = "funcionario_id")
-    private Integer FuncionarioId;
+    @ManyToOne
+    @JoinColumn(name = "funcionario_id", referencedColumnName = "funcionario_id")
+    private Funcionario funcionario;
+
+    @OneToMany(mappedBy = "produto")
+    private List<MovimentacaoItem> listaMovimentacao;
+
 
     //Construtor vazio
     public Produto() {
@@ -111,19 +116,27 @@ public class Produto {
         this.produtoValorUnitario = produtoValorUnitario;
     }
 
-    public Integer getCategoriaId() {
-        return categoriaId;
+    public ProdutoCategoria getProdutoCategoria() {
+        return produtoCategoria;
     }
 
-    public void setCategoriaId(Integer categoriaId) {
-        this.categoriaId = categoriaId;
+    public void setProdutoCategoria(ProdutoCategoria produtoCategoria) {
+        this.produtoCategoria = produtoCategoria;
     }
 
-    public Integer getFuncionarioId() {
-        return FuncionarioId;
+    public Funcionario getFuncionario() {
+        return funcionario;
     }
 
-    public void setFuncionarioId(Integer funcionarioId) {
-        FuncionarioId = funcionarioId;
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
+    public List<MovimentacaoItem> getListaMovimentacao() {
+        return listaMovimentacao;
+    }
+
+    public void setListaMovimentacao(List<MovimentacaoItem> listaMovimentacao) {
+        this.listaMovimentacao = listaMovimentacao;
     }
 }

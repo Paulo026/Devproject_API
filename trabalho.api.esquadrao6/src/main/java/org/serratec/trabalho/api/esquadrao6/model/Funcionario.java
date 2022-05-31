@@ -3,6 +3,7 @@ package org.serratec.trabalho.api.esquadrao6.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "FUNCIONARIO")
@@ -25,6 +26,8 @@ public class Funcionario {
     private String funcionarioCpf;
 
     //Relações com outras tabelas --> Verificar relações e aplicar depois
+    @OneToMany(mappedBy = "funcionario")
+    private List<Produto> listaProduto;
 
 
     //Construtor vazio
@@ -54,5 +57,13 @@ public class Funcionario {
 
     public void setFuncionarioCpf(String funcionarioCpf) {
         this.funcionarioCpf = funcionarioCpf;
+    }
+
+    public List<Produto> getListaProduto() {
+        return listaProduto;
+    }
+
+    public void setListaProduto(List<Produto> listaProduto) {
+        this.listaProduto = listaProduto;
     }
 }
