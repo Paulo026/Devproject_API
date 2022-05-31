@@ -3,78 +3,93 @@ package org.serratec.trabalho.api.esquadrao6.dto;
 import java.time.LocalDate;
 
 public class ProdutoDTO {
-	
-	private Integer idProduto;
-	private String nomeProduto;
-	private String descricaoProduto;
-	private Double valorUnitario;
-	private LocalDate dataValidade;
-	private Integer qtdeEstoque;
-	
-	public ProdutoDTO() {}
-	
-	
+    //Atributos específicos da classe
+    private Integer produtoId;
+    private String produtoNome;
+    private String produtoDescricao;
+    private Integer produtoQuantidadeEstoque;
+    private LocalDate produtoDataFabricacao;
+    private LocalDate produtoDataValidade;
+    private Double produtoValorUnitario;
 
-	public ProdutoDTO(Integer idProduto, String nomeProduto, String descricaoProduto, Double valorUnitario,
-			LocalDate dataValidade, Integer qtdeEstoque) {
-		super();
-		this.idProduto = idProduto;
-		this.nomeProduto = nomeProduto;
-		this.descricaoProduto = descricaoProduto;
-		this.valorUnitario = valorUnitario;
-		this.dataValidade = dataValidade;
-		this.qtdeEstoque = qtdeEstoque;
-	}
+    //Atributos que se relacionam com outras classes
+    private Integer categoriaID;
+    private Integer funcionarioID;
 
+    //Construtor Vazio
+    public ProdutoDTO() {
+    }
 
-	public Integer getIdProduto() {
-		return idProduto;
-	}
+    //Getters e Setters
+    public Integer getProdutoId() {
+        return produtoId;
+    }
 
-	public void setIdProduto(Integer idProduto) {
-		this.idProduto = idProduto;
-	}
+    public void setProdutoId(Integer produtoId) {
+        this.produtoId = produtoId;
+    }
 
-	public String getNomeProduto() {
-		return nomeProduto;
-	}
+    public String getProdutoNome() {
+        return produtoNome;
+    }
 
-	public void setNomeProduto(String nomeProduto) {
-		this.nomeProduto = nomeProduto;
-	}
+    public void setProdutoNome(String produtoNome) {
+        this.produtoNome = produtoNome;
+    }
 
-	public String getDescricaoProduto() {
-		return descricaoProduto;
-	}
+    public String getProdutoDescricao() {
+        return produtoDescricao;
+    }
 
-	public void setDescricaoProduto(String descricaoProduto) {
-		this.descricaoProduto = descricaoProduto;
-	}
+    public void setProdutoDescricao(String produtoDescricao) {
+        this.produtoDescricao = produtoDescricao;
+    }
 
-	public Double getValorUnitario() {
-		return valorUnitario;
-	}
+    public Integer getProdutoQuantidadeEstoque() {
+        return produtoQuantidadeEstoque;
+    }
 
-	public void setValorUnitario(Double valorUnitario) {
-		this.valorUnitario = valorUnitario;
-	}
+    public void setProdutoQuantidadeEstoque(Integer produtoQuantidadeEstoque) {
+        this.produtoQuantidadeEstoque = produtoQuantidadeEstoque;
+    }
 
-	public LocalDate getDataValidade() {
-		return dataValidade;
-	}
+    public LocalDate getProdutoDataFabricacao() {
+        return produtoDataFabricacao;
+    }
 
-	public void setDataValidade(LocalDate dataValidade) {
-		this.dataValidade = dataValidade;
-	}
+    public void setProdutoDataFabricacao(LocalDate produtoDataFabricacao) {
+        this.produtoDataFabricacao = produtoDataFabricacao;
+    }
 
-	public Integer getQtdeEstoque() {
-		return qtdeEstoque;
-	}
+    public LocalDate getProdutoDataValidade() {
+        return produtoDataValidade;
+    }
 
-	public void setQtdeEstoque(Integer qtdeEstoque) {
-		this.qtdeEstoque = qtdeEstoque;
-	}
-	
-	
-	
+    public void setProdutoDataValidade(LocalDate produtoDataValidade) {
+        this.produtoDataValidade = produtoDataValidade;
+    }
+
+    public Double getProdutoValorUnitario() {
+        return produtoValorUnitario;
+    }
+
+    public void setProdutoValorUnitario(Double produtoValorUnitario) {
+        this.produtoValorUnitario = produtoValorUnitario;
+    }
+
+    public Integer getCategoriaID() {
+        return categoriaID;
+    }
+
+    public void setCategoriaID(Integer categoriaID) {
+        this.categoriaID = categoriaID;
+    }
+
+    public Integer getFuncionarioID() {
+        return funcionarioID;
+    }
+
+    public void setFuncionarioID(Integer funcionarioID) {
+        this.funcionarioID = funcionarioID;
+    }
 }
