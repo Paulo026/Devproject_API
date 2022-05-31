@@ -5,9 +5,10 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
-@Table(name = "CLIENTE")
+@Table(name = "cliente")
 public class Cliente {
     //Atributos da tabela (sem relações)
     @Id
@@ -52,7 +53,7 @@ public class Cliente {
     private String clienteTelefone;
 
     @NotNull
-    @Column(name = "cliente_endereco_completo")
+    @Column(name = "cliente_end_completo")
     @Size(min = 20, max = 600)
     private String clienteEnderecoCompleto;
 
@@ -62,6 +63,9 @@ public class Cliente {
     private String clienteCep;
 
     //Relações com outras tabelas --> Verificar relações e aplicar depois
+    @OneToMany(mappedBy = "cliente")
+    private List<MovimentacaoItem> listaMovimentacao;
+
 
     //Construtor vazio
     public Cliente() {
@@ -139,13 +143,20 @@ public class Cliente {
     public void setClienteEnderecoCompleto(String clienteEnderecoCompleto) {
         this.clienteEnderecoCompleto = clienteEnderecoCompleto;
     }
-    
-    
-    public String getClienteCep() {
-		return clienteCep;
-	}
 
-	public void setClienteCep(String clienteCep) {
-		this.clienteCep = clienteCep;
-	}
+    public String getClienteCep() {
+        return clienteCep;
+    }
+
+    public void setClienteCep(String clienteCep) {
+        this.clienteCep = clienteCep;
+    }
+
+    public List<MovimentacaoItem> getListaMovimentacao() {
+        return listaMovimentacao;
+    }
+
+    public void setListaMovimentacao(List<MovimentacaoItem> listaMovimentacao) {
+        this.listaMovimentacao = listaMovimentacao;
+    }
 }

@@ -3,9 +3,10 @@ package org.serratec.trabalho.api.esquadrao6.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
-@Table(name = "PRODUTO_CATEGORIA")
+@Table(name = "produto_categoria")
 public class ProdutoCategoria {
     //Atributos da tabela (sem relações)
     @Id
@@ -25,6 +26,8 @@ public class ProdutoCategoria {
     private String categoriaDescricao;
 
     //Relações com outras tabelas --> Verificar relações e aplicar depois
+    @OneToMany(mappedBy = "produtoCategoria")
+    private List<Produto> listaProduto;
 
 
     //Construtor vazio
@@ -54,5 +57,13 @@ public class ProdutoCategoria {
 
     public void setCategoriaDescricao(String categoriaDescricao) {
         this.categoriaDescricao = categoriaDescricao;
+    }
+
+    public List<Produto> getListaProduto() {
+        return listaProduto;
+    }
+
+    public void setListaProduto(List<Produto> listaProduto) {
+        this.listaProduto = listaProduto;
     }
 }
