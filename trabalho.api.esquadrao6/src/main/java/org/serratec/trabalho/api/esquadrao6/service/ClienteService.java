@@ -14,8 +14,7 @@ public class ClienteService {
 
 	@Autowired
 	ClienteRepository clienteRepository;
-
-
+	
 	
 	//código = id
 	// verificar se há erro
@@ -100,7 +99,7 @@ public class ClienteService {
 		clienteDTO.setClienteTelefone(cliente.getClienteTelefone());
 		clienteDTO.setClienteEnderecoCompleto(cliente.getClienteEnderecoCompleto());
 		clienteDTO.setClienteCep(cliente.getClienteCep());
-		clienteDTO.setMovimentacaoID();
+		
 
 		return clienteDTO;
 	}
