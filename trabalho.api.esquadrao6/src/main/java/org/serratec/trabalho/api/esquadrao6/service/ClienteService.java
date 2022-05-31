@@ -15,34 +15,7 @@ public class ClienteService {
 	@Autowired
 	ClienteRepository clienteRepository;
 
-	public ClienteDTO transformarModelEmDTO(Cliente cliente, ClienteDTO clienteDTO) {
-		clienteDTO.setClienteId(cliente.getClienteId());
-		clienteDTO.setClienteNome(cliente.getClienteNome());
-		clienteDTO.setClienteUsuario(cliente.getClienteUsuario());
-		clienteDTO.setClienteSenha(cliente.getClienteSenha());
-		clienteDTO.setClienteEmail(cliente.getClienteEmail());
-		clienteDTO.setClienteCpf(cliente.getClienteCpf());
-		clienteDTO.setClienteDataNascimento(cliente.getClienteDataNascimento());
-		clienteDTO.setClienteTelefone(cliente.getClienteTelefone());
-		clienteDTO.setClienteEnderecoCompleto(cliente.getClienteEnderecoCompleto());
-		clienteDTO.setClienteCep(cliente.getClienteCep());
 
-		return clienteDTO;
-	}
-
-	public Cliente transformarDTOEmModel(ClienteDTO clienteDTO, Cliente cliente) {
-		cliente.setClienteNome(clienteDTO.getClienteNome());
-		cliente.setClienteUsuario(clienteDTO.getClienteUsuario());
-		cliente.setClienteSenha(clienteDTO.getClienteSenha());
-		cliente.setClienteEmail(clienteDTO.getClienteEmail());
-		cliente.setClienteCpf(clienteDTO.getClienteCpf());
-		cliente.setClienteDataNascimento(clienteDTO.getClienteDataNascimento());
-		cliente.setClienteTelefone(clienteDTO.getClienteTelefone());
-		cliente.setClienteEnderecoCompleto(clienteDTO.getClienteEnderecoCompleto());
-		cliente.setClienteCep(clienteDTO.getClienteCep());
-
-		return cliente;
-	}
 	
 	//código = id
 	// verificar se há erro
@@ -114,7 +87,36 @@ public class ClienteService {
 		}
 			throw new ClienteException("O cliente não fora atualizado!");
 	}
-	
-	
+
+	//Conversores
+	public ClienteDTO transformarModelEmDTO(Cliente cliente, ClienteDTO clienteDTO) {
+		clienteDTO.setClienteId(cliente.getClienteId());
+		clienteDTO.setClienteNome(cliente.getClienteNome());
+		clienteDTO.setClienteUsuario(cliente.getClienteUsuario());
+		clienteDTO.setClienteSenha(cliente.getClienteSenha());
+		clienteDTO.setClienteEmail(cliente.getClienteEmail());
+		clienteDTO.setClienteCpf(cliente.getClienteCpf());
+		clienteDTO.setClienteDataNascimento(cliente.getClienteDataNascimento());
+		clienteDTO.setClienteTelefone(cliente.getClienteTelefone());
+		clienteDTO.setClienteEnderecoCompleto(cliente.getClienteEnderecoCompleto());
+		clienteDTO.setClienteCep(cliente.getClienteCep());
+		clienteDTO.setMovimentacaoID();
+
+		return clienteDTO;
+	}
+
+	public Cliente transformarDTOEmModel(ClienteDTO clienteDTO, Cliente cliente) {
+		cliente.setClienteNome(clienteDTO.getClienteNome());
+		cliente.setClienteUsuario(clienteDTO.getClienteUsuario());
+		cliente.setClienteSenha(clienteDTO.getClienteSenha());
+		cliente.setClienteEmail(clienteDTO.getClienteEmail());
+		cliente.setClienteCpf(clienteDTO.getClienteCpf());
+		cliente.setClienteDataNascimento(clienteDTO.getClienteDataNascimento());
+		cliente.setClienteTelefone(clienteDTO.getClienteTelefone());
+		cliente.setClienteEnderecoCompleto(clienteDTO.getClienteEnderecoCompleto());
+		cliente.setClienteCep(clienteDTO.getClienteCep());
+
+		return cliente;
+	}
 
 }
