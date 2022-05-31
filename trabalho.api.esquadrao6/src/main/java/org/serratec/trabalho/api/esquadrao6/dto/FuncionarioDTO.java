@@ -1,43 +1,50 @@
 package org.serratec.trabalho.api.esquadrao6.dto;
 
 public class FuncionarioDTO {
-	
-	private Integer FuncionarioId;
-	private String funcionarioNome;
-	private String funcionarioCpf;
-	
-	public FuncionarioDTO() {}
 
-	public FuncionarioDTO(Integer funcionarioId, String funcionarioNome, String funcionarioCpf) {
-		super();
-		FuncionarioId = funcionarioId;
-		this.funcionarioNome = funcionarioNome;
-		this.funcionarioCpf = funcionarioCpf;
-	}
+    //Atributos específicos da classe
+    private Integer FuncionarioId;
+    private String funcionarioNome;
+    private String funcionarioCpf;
 
-	public Integer getFuncionarioId() {
-		return FuncionarioId;
-	}
+    //Atributos que se relacionam com outras classes
+    private int produtoID;
 
-	public void setFuncionarioId(Integer funcionarioId) {
-		FuncionarioId = funcionarioId;
-	}
+    //Construtor Vazio
+    public FuncionarioDTO() {
+    }
 
-	public String getFuncionarioNome() {
-		return funcionarioNome;
-	}
 
-	public void setFuncionarioNome(String funcionarioNome) {
-		this.funcionarioNome = funcionarioNome;
-	}
+    //Getters e Setters
+    public Integer getFuncionarioId() {
+        return FuncionarioId;
+    }
 
-	public String getFuncionarioCpf() {
-		return funcionarioCpf;
-	}
+    public void setFuncionarioId(Integer funcionarioId) {
+        FuncionarioId = funcionarioId;
+    }
 
-	public void setFuncionarioCpf(String funcionarioCpf) {
-		this.funcionarioCpf = funcionarioCpf;
-	}
-	
-	
+    public String getFuncionarioNome() {
+        return funcionarioNome;
+    }
+
+    public void setFuncionarioNome(String funcionarioNome) {
+        this.funcionarioNome = funcionarioNome;
+    }
+
+    public String getFuncionarioCpf() {
+        return funcionarioCpf;
+    }
+
+    public void setFuncionarioCpf(String funcionarioCpf) {
+        this.funcionarioCpf = funcionarioCpf;
+    }
+
+    public int getProdutoID() {
+        return produtoID;
+    }
+
+    public void setProdutoID(int produtoID) {
+        this.produtoID = produtoID;
+    }
 }
