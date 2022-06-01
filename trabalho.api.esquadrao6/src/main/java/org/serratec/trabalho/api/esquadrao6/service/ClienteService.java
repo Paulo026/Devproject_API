@@ -1,5 +1,7 @@
 package org.serratec.trabalho.api.esquadrao6.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.serratec.trabalho.api.esquadrao6.dto.ClienteDTO;
@@ -118,4 +120,27 @@ public class ClienteService {
 		return cliente;
 	}
 
+	public List<ClienteDTO> buscarTodos(){
+		List<Cliente> listaClienteModel = clienteRepository.findAll();
+		List<ClienteDTO> listaClienteDTO = new ArrayList<>();
+
+		for(Cliente cliente : listaClienteModel){
+			ClienteDTO clienteDTO = new ClienteDTO();
+			transformarModelEmDTO(cliente,clienteDTO);
+			listaClienteDTO.add(clienteDTO);
+		}
+
+		return listaClienteDTO;
+
+	}
+
+	public void salvarListaCLiente(List<ClienteDTO> listaClienteDTO){
+		List<Cliente> listaCliente = new ArrayList<>();
+		for (ClienteDTO clienteDTO : listaClienteDTO){
+			Cliente cliente = new Cliente();
+			transformarDTOEmModel(clienteDTO, cliente);
+			listaCliente.add(cliente);
+		}
+			clienteRepository.saveAll(listaCliente);
+	}
 }

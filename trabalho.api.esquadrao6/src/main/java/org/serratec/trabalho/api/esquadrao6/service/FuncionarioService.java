@@ -18,11 +18,6 @@ public class FuncionarioService {
 	}
 	
 	
-	
-	
-	
-	
-	
 	public FuncionarioDTO transformarModelEmDTO(Funcionario funcionario, FuncionarioDTO funcionarioDTO) {
 		funcionarioDTO.setFuncionarioId(funcionario.getFuncionarioId());
 		funcionarioDTO.setFuncionarioNome(funcionario.getFuncionarioNome());
