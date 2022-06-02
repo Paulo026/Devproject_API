@@ -1,4 +1,62 @@
 package org.serratec.trabalho.api.esquadrao6.controller;
 
+import org.serratec.trabalho.api.esquadrao6.dto.FuncionarioDTO;
+import org.serratec.trabalho.api.esquadrao6.exception.FuncionarioException;
+import org.serratec.trabalho.api.esquadrao6.model.Funcionario;
+import org.serratec.trabalho.api.esquadrao6.service.FuncionarioService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/funcionario")
 public class FuncionarioController {
+
+    @Autowired
+    FuncionarioService funcionarioService;
+
+    //verificar erro
+    @PostMapping("/salvar")
+    public ResponseEntity<String> salvar(@RequestBody FuncionarioDTO funcionarioDTO){
+        return ResponseEntity.ok(funcionarioService.salvar(funcionarioDTO));
+    }
+
+    @GetMapping("/buscar/{funcionarioId}")
+    public ResponseEntity<FuncionarioDTO> buscarPorId(@PathVariable Integer funcionarioId) throws FuncionarioException{
+        return ResponseEntity.ok(funcionarioService.buscarPorid(funcionarioId));
+    }
+
+    @DeleteMapping("/{funcionarioId}")
+    public ResponseEntity<Void> deletar(@PathVariable Integer funcionarioId){
+        funcionarioService.deletar(funcionarioId);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
+    @PutMapping("atualizar/{funcionarioId}")
+    public ResponseEntity<String> atualizar(@PathVariable Integer funcionarioId, @RequestBody FuncionarioDTO funcionarioDTO)
+    throws FuncionarioException{
+        return ResponseEntity.ok(funcionarioService.atualizar(funcionarioId, funcionarioDTO));
+    }
+
+    @GetMapping("/lista")
+    public ResponseEntity<List<FuncionarioDTO>> listarTodos(){
+        return ResponseEntity.ok(funcionarioService.buscarTodos());
+    }
+
+    @PostMapping("/salvar-lista")
+    public ResponseEntity<Void> salvarLista(@RequestBody List<FuncionarioDTO> listafuncionarioDTO){
+        funcionarioService.salvarlistaFuncionario(listafuncionarioDTO);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+
+
+
+
+
+
+
 }
