@@ -52,9 +52,9 @@ public class ProdutoCategoriaService {
         produtoCategoriaRepository.deleteById(categoriaId);
     }
 
-    public String atualizar(Integer categoriaId, ProdutoCategoriaDTO produtoCategoriaDTO) throws ProdutoCategoriaException{
-        Optional<ProdutoCategoria> produtoCategoria = produtoCategoriaRepository.findById(categoriaId);
-        
-    }
+//    public String atualizar(Integer categoriaId, ProdutoCategoriaDTO produtoCategoriaDTO) throws ProdutoCategoriaException{
+//        Optional<ProdutoCategoria> produtoCategoria = produtoCategoriaRepository.findById(categoriaId);
+//
+//    }
 
 }

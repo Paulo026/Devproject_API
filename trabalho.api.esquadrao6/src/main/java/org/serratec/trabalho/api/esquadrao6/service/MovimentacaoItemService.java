@@ -3,9 +3,11 @@ package org.serratec.trabalho.api.esquadrao6.service;
 import org.serratec.trabalho.api.esquadrao6.dto.RelatorioDTO;
 import org.serratec.trabalho.api.esquadrao6.repository.MovimentacaoItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class MovimentacaoItemService {
 
     @Autowired
