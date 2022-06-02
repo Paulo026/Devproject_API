@@ -7,6 +7,8 @@ import org.serratec.trabalho.api.esquadrao6.repository.ProdutoCategoriaRepositor
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -54,7 +56,41 @@ public class ProdutoCategoriaService {
 
     public String atualizar(Integer categoriaId, ProdutoCategoriaDTO produtoCategoriaDTO) throws ProdutoCategoriaException{
         Optional<ProdutoCategoria> produtoCategoria = produtoCategoriaRepository.findById(categoriaId);
-        
+        ProdutoCategoria produtoCategoriaLoja = new ProdutoCategoria();
+        if(produtoCategoria.isPresent()){
+            produtoCategoriaLoja = produtoCategoria.get();
+            if(produtoCategoriaDTO.getCategoriaNome() != null){
+                produtoCategoriaLoja.setCategoriaNome(produtoCategoriaDTO.getCategoriaNome());
+            }
+            if(produtoCategoriaDTO.getCategoriaDescricao() != null){
+                produtoCategoriaLoja.setCategoriaDescricao(produtoCategoriaDTO.getCategoriaDescricao());
+            }
+            produtoCategoriaRepository.save(produtoCategoriaLoja);
+            return "A categoria com o código "+produtoCategoriaLoja.getCategoriaId()+"foi atualizado"
+        }
+            throw new ProdutoCategoriaException("A categoria não foi atualizada, verifique od dados digitados.");
+
+    }
+
+    public List<ProdutoCategoriaDTO> buscarTodos(){
+        List<ProdutoCategoria> listaProdutoCategoriaModel = produtoCategoriaRepository.findAll();
+        List<ProdutoCategoriaDTO> listaProdutoCategoriaDTO = new ArrayList<>();
+        for(ProdutoCategoria produtoCategoria : listaProdutoCategoriaModel){
+            ProdutoCategoriaDTO produtoCategoriaDTO = new ProdutoCategoriaDTO();
+            transformarModelEmDTO(produtoCategoria, produtoCategoriaDTO);
+            listaProdutoCategoriaDTO.add(produtoCategoriaDTO);
+        }
+        return listaProdutoCategoriaDTO;
+    }
+
+    public void salvarListaCategoria(List<ProdutoCategoriaDTO> listaProdutoCategoriaDTO){
+        List<ProdutoCategoria> listaProdutoCategoria = new ArrayList<>();
+        for(ProdutoCategoriaDTO produtoCategoriaDTO : listaProdutoCategoriaDTO){
+            ProdutoCategoria produtoCategoria = new ProdutoCategoria();
+            transformarDTOEmMOdel(produtoCategoria, produtoCategoriaDTO);
+            listaProdutoCategoria.add(produtoCategoria);
+        }
+        produtoCategoriaRepository.saveAll(listaProdutoCategoria);
     }
 
 }
