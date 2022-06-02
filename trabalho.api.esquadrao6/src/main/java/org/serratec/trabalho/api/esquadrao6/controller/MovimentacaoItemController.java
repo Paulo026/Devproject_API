@@ -1,8 +1,5 @@
 package org.serratec.trabalho.api.esquadrao6.controller;
 
-
-public class PedidoItemController {
-
 import org.serratec.trabalho.api.esquadrao6.dto.RelatorioDTO;
 import org.serratec.trabalho.api.esquadrao6.service.MovimentacaoItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +23,5 @@ public class MovimentacaoItemController {
     public List<RelatorioDTO> relatorioProdutosMaisVendidos() {
         return movimentacaoItemService.relatorioProdutosMaisVendidos();
     }
- main
+
 }
