@@ -5,7 +5,7 @@ public interface RelatorioDTO {
 
     public Double getValorTotal();
 
-    public Integer movimentacaoTotal();
+    public Integer getMovimentacaoTotal();
 
-    public String produtoNome();
+    public String getProdutoNome();
 }
