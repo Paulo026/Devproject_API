@@ -15,8 +15,7 @@ public class ClienteDTO {
     private String clienteEnderecoCompleto;
     private String clienteCep;
 
-    //Atributos que se relacionam com outras classes
-    private Integer movimentacaoID;
+
 
     //Construtor Vazio
 	public ClienteDTO() {
@@ -104,11 +103,4 @@ public class ClienteDTO {
 		this.clienteCep = clienteCep;
 	}
 
-	public Integer getMovimentacaoID() {
-		return movimentacaoID;
-	}
-
-	public void setMovimentacaoID(Integer movimentacaoID) {
-		this.movimentacaoID = movimentacaoID;
-	}
 }

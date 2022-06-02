@@ -7,8 +7,8 @@ public class FuncionarioDTO {
     private String funcionarioNome;
     private String funcionarioCpf;
 
-    //Atributos que se relacionam com outras classes
-    private int produtoID;
+
+
 
     //Construtor Vazio
     public FuncionarioDTO() {
@@ -40,11 +40,4 @@ public class FuncionarioDTO {
         this.funcionarioCpf = funcionarioCpf;
     }
 
-    public int getProdutoID() {
-        return produtoID;
-    }
-
-    public void setProdutoID(int produtoID) {
-        this.produtoID = produtoID;
-    }
 }

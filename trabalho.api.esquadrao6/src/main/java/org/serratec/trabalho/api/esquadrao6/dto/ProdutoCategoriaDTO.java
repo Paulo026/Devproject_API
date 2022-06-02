@@ -6,8 +6,7 @@ public class ProdutoCategoriaDTO {
     private String categoriaNome;
     private String categoriaDescricao;
 
-    //Atributos que se relacionam com outras classes
-    private Integer idProduto;
+
 
     //Construtor Vazio
     public ProdutoCategoriaDTO() {
@@ -39,11 +38,4 @@ public class ProdutoCategoriaDTO {
         this.categoriaDescricao = categoriaDescricao;
     }
 
-    public Integer getIdProduto() {
-        return idProduto;
-    }
-
-    public void setIdProduto(Integer idProduto) {
-        this.idProduto = idProduto;
-    }
 }

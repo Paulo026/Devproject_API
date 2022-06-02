@@ -1,5 +1,6 @@
 package org.serratec.trabalho.api.esquadrao6.controller;
 
+
 import org.serratec.trabalho.api.esquadrao6.dto.RelatorioDTO;
 import org.serratec.trabalho.api.esquadrao6.service.MovimentacaoItemService;
 import org.springframework.beans.factory.annotation.Autowired;
