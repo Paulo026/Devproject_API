@@ -1,9 +1,5 @@
 package org.serratec.trabalho.api.esquadrao6.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import org.serratec.trabalho.api.esquadrao6.dto.ProdutoDTO;
 import org.serratec.trabalho.api.esquadrao6.exception.ProdutoException;
 import org.serratec.trabalho.api.esquadrao6.model.Produto;
@@ -12,6 +8,10 @@ import org.serratec.trabalho.api.esquadrao6.repository.ProdutoCategoriaRepositor
 import org.serratec.trabalho.api.esquadrao6.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProdutoService {
@@ -33,8 +33,11 @@ public class ProdutoService {
 		produtoDTO.setProdutoDataFabricacao(produto.getProdutoDataFabricacao());
 		produtoDTO.setProdutoDataValidade(produto.getProdutoDataValidade());
 		produtoDTO.setProdutoValorUnitario(produto.getProdutoValorUnitario());
+		produtoDTO.setCategoriaID(produto.getProdutoCategoria().getCategoriaId());
+		produtoDTO.setCategoriaNome(produto.getProdutoCategoria().getCategoriaNome());
+		produtoDTO.setFuncionarioID(produto.getFuncionario().getFuncionarioId());
+		produtoDTO.setFuncionarioNome(produto.getFuncionario().getFuncionarioNome());
 
-		//Verificar ligações
 		return produtoDTO;
 	}
 	
@@ -54,6 +57,7 @@ public class ProdutoService {
 		if(produtoDTO.getCategoriaID() !=null) {
 			produto.setProdutoCategoria(pCategoriaRepository.findById(produtoDTO.getCategoriaID()).get());
 		}
+
 		return produto;
 	}
 	

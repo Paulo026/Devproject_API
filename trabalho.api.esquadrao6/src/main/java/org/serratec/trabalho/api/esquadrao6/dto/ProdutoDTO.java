@@ -14,7 +14,9 @@ public class ProdutoDTO {
 
     //Atributos que se relacionam com outras classes
     private Integer categoriaID;
+    private String categoriaNome;
     private Integer funcionarioID;
+    private String funcionarioNome;
 
     //Construtor Vazio
     public ProdutoDTO() {
@@ -85,11 +87,27 @@ public class ProdutoDTO {
         this.categoriaID = categoriaID;
     }
 
+    public String getCategoriaNome() {
+        return categoriaNome;
+    }
+
+    public void setCategoriaNome(String categoriaNome) {
+        this.categoriaNome = categoriaNome;
+    }
+
     public Integer getFuncionarioID() {
         return funcionarioID;
     }
 
     public void setFuncionarioID(Integer funcionarioID) {
         this.funcionarioID = funcionarioID;
+    }
+
+    public String getFuncionarioNome() {
+        return funcionarioNome;
+    }
+
+    public void setFuncionarioNome(String funcionarioNome) {
+        this.funcionarioNome = funcionarioNome;
     }
 }
