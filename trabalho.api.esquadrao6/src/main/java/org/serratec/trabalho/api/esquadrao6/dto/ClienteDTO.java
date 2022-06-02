@@ -16,6 +16,7 @@ public class ClienteDTO {
     private String clienteCep;
 
 
+
     //Construtor Vazio
 	public ClienteDTO() {
 	}

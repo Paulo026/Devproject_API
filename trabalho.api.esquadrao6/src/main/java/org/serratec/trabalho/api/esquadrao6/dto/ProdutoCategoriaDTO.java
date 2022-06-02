@@ -7,6 +7,7 @@ public class ProdutoCategoriaDTO {
     private String categoriaDescricao;
 
 
+
     //Construtor Vazio
     public ProdutoCategoriaDTO() {
     }
