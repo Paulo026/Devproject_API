@@ -54,6 +54,12 @@ public class ProdutoCategoriaService {
         produtoCategoriaRepository.deleteById(categoriaId);
     }
 
+<<<<<<< HEAD
+//    public String atualizar(Integer categoriaId, ProdutoCategoriaDTO produtoCategoriaDTO) throws ProdutoCategoriaException{
+//        Optional<ProdutoCategoria> produtoCategoria = produtoCategoriaRepository.findById(categoriaId);
+//
+//    }
+=======
     public String atualizar(Integer categoriaId, ProdutoCategoriaDTO produtoCategoriaDTO) throws ProdutoCategoriaException{
         Optional<ProdutoCategoria> produtoCategoria = produtoCategoriaRepository.findById(categoriaId);
         ProdutoCategoria produtoCategoriaLoja = new ProdutoCategoria();
@@ -92,5 +98,6 @@ public class ProdutoCategoriaService {
         }
         produtoCategoriaRepository.saveAll(listaProdutoCategoria);
     }
+>>>>>>> 94dee85f5d1f972483d82b859d0cb1801891625c
 
 }
