@@ -66,7 +66,7 @@ public class ProdutoCategoriaService {
                 produtoCategoriaLoja.setCategoriaDescricao(produtoCategoriaDTO.getCategoriaDescricao());
             }
             produtoCategoriaRepository.save(produtoCategoriaLoja);
-            return "A categoria com o código "+produtoCategoriaLoja.getCategoriaId()+"foi atualizado"
+            return "A categoria com o código "+produtoCategoriaLoja.getCategoriaId()+"foi atualizado";
         }
             throw new ProdutoCategoriaException("A categoria não foi atualizada, verifique od dados digitados.");
 
