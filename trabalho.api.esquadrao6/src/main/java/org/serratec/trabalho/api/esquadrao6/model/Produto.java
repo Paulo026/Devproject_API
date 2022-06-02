@@ -23,7 +23,7 @@ public class Produto {
 
     @NotNull
     @Column(name = "produto_descricao")
-    @Size(max = 500)
+    @Size(max = 600)
     private String produtoDescricao;
 
     @NotNull
@@ -34,7 +34,6 @@ public class Produto {
     @Column(name = "produto_dt_fabricacao")
     private LocalDate produtoDataFabricacao;
 
-    @NotNull
     @Column(name = "produto_dt_validade")
     private LocalDate produtoDataValidade;
 
