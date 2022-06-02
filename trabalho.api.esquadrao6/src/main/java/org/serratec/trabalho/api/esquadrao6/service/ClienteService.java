@@ -1,15 +1,15 @@
 package org.serratec.trabalho.api.esquadrao6.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import org.serratec.trabalho.api.esquadrao6.dto.ClienteDTO;
 import org.serratec.trabalho.api.esquadrao6.exception.ClienteException;
 import org.serratec.trabalho.api.esquadrao6.model.Cliente;
 import org.serratec.trabalho.api.esquadrao6.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClienteService {
@@ -134,7 +134,6 @@ public class ClienteService {
 
 	}
 
-	teste github {}
 
 	public void salvarListaCLiente(List<ClienteDTO> listaClienteDTO){
 		List<Cliente> listaCliente = new ArrayList<>();
