@@ -1,0 +1,33 @@
+2022-06-02 16:05:01 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "CLIENTE_CEP CHARACTER VARYING(8)": "'55031-430' (9)"; SQL statement:
+INSERT INTO public.cliente (cliente_id, cliente_nome, cliente_usuario, cliente_senha, cliente_email, cliente_cpf, cliente_dt_nasc, cliente_telefone, cliente_end_completo, cliente_cep) VALUES(1, 'José', 'jose123', '123456', 'jose@jose.com', '123', '1991-01-01', '(21)123451234', 'Rua Maria José de Souza, nº 102, Cidade Alta, Caruaru, Caruaru', '55031-430') [22001-212]
+2022-06-02 16:05:01 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "CLIENTE_CEP CHARACTER VARYING(8)": "'38700-098' (9)"; SQL statement:
+INSERT INTO public.cliente (cliente_id, cliente_nome, cliente_usuario, cliente_senha, cliente_email, cliente_cpf, cliente_dt_nasc, cliente_telefone, cliente_end_completo, cliente_cep) VALUES(2, 'Renato', 'RenatinhodeTere', '172839', 'renato@tere.com.br', '456789', '1975-12-01', '(21) 999994444', 'Travessa Sumbem, nº 259, Centro, Patos de Minas, MG', '38700-098') [22001-212]
+2022-06-02 16:05:01 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "CLIENTE_CEP CHARACTER VARYING(8)": "'77022-004' (9)"; SQL statement:
+INSERT INTO public.cliente (cliente_id, cliente_nome, cliente_usuario, cliente_senha, cliente_email, cliente_cpf, cliente_dt_nasc, cliente_telefone, cliente_end_completo, cliente_cep) VALUES(3, 'Joca', 'Joca123456', '7894561432', 'joca@joquito.com.br', '456', '1980-05-15', '(21)111112222', 'Quadra 602 Sul Avenida LO 13, nº 749, Plano Diretor Sul, Palmas, TO', '77022-004') [22001-212]
+2022-06-02 16:05:01 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "CLIENTE_CEP CHARACTER VARYING(8)": "'60410-316' (9)"; SQL statement:
+INSERT INTO public.cliente (cliente_id, cliente_nome, cliente_usuario, cliente_senha, cliente_email, cliente_cpf, cliente_dt_nasc, cliente_telefone, cliente_end_completo, cliente_cep) VALUES(4, 'Aminadabe', 'amina', 'dabe', 'amina@da.be', '555', '1995-03-21', '(11)0000077777', 'Travessa São Mateus, nº 499, Parreão, Fortaleza, CE', '60410-316') [22001-212]
+2022-06-02 16:05:01 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "CLIENTE_CEP CHARACTER VARYING(8)": "'29145-006' (9)"; SQL statement:
+INSERT INTO public.cliente (cliente_id, cliente_nome, cliente_usuario, cliente_senha, cliente_email, cliente_cpf, cliente_dt_nasc, cliente_telefone, cliente_end_completo, cliente_cep) VALUES(5, 'Jumara', 'Jumar4', '123456', 'ju@gmail.com', '123456', '2005-10-12', '(99)999999999', 'Rua Pernambuco, nº 864, Santa Bárbara, Cariacica, ES', '29145-006') [22001-212]
+2022-06-02 16:05:40 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "CLIENTE_TELEFONE CHARACTER VARYING(11)": "'(21)123451234' (13)"; SQL statement:
+INSERT INTO public.cliente (cliente_id, cliente_nome, cliente_usuario, cliente_senha, cliente_email, cliente_cpf, cliente_dt_nasc, cliente_telefone, cliente_end_completo, cliente_cep) VALUES(1, 'José', 'jose123', '123456', 'jose@jose.com', '123', '1991-01-01', '(21)123451234', 'Rua Maria José de Souza, nº 102, Cidade Alta, Caruaru, Caruaru', '55031430') [22001-212]
+2022-06-02 16:05:40 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "CLIENTE_TELEFONE CHARACTER VARYING(11)": "'(21) 999994444' (14)"; SQL statement:
+INSERT INTO public.cliente (cliente_id, cliente_nome, cliente_usuario, cliente_senha, cliente_email, cliente_cpf, cliente_dt_nasc, cliente_telefone, cliente_end_completo, cliente_cep) VALUES(2, 'Renato', 'RenatinhodeTere', '172839', 'renato@tere.com.br', '456789', '1975-12-01', '(21) 999994444', 'Travessa Sumbem, nº 259, Centro, Patos de Minas, MG', '38700098') [22001-212]
+2022-06-02 16:05:40 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "CLIENTE_TELEFONE CHARACTER VARYING(11)": "'(21)111112222' (13)"; SQL statement:
+INSERT INTO public.cliente (cliente_id, cliente_nome, cliente_usuario, cliente_senha, cliente_email, cliente_cpf, cliente_dt_nasc, cliente_telefone, cliente_end_completo, cliente_cep) VALUES(3, 'Joca', 'Joca123456', '7894561432', 'joca@joquito.com.br', '456', '1980-05-15', '(21)111112222', 'Quadra 602 Sul Avenida LO 13, nº 749, Plano Diretor Sul, Palmas, TO', '77022004') [22001-212]
+2022-06-02 16:05:40 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "CLIENTE_TELEFONE CHARACTER VARYING(11)": "'(11)0000077777' (14)"; SQL statement:
+INSERT INTO public.cliente (cliente_id, cliente_nome, cliente_usuario, cliente_senha, cliente_email, cliente_cpf, cliente_dt_nasc, cliente_telefone, cliente_end_completo, cliente_cep) VALUES(4, 'Aminadabe', 'amina', 'dabe', 'amina@da.be', '555', '1995-03-21', '(11)0000077777', 'Travessa São Mateus, nº 499, Parreão, Fortaleza, CE', '60410316') [22001-212]
+2022-06-02 16:05:40 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "CLIENTE_TELEFONE CHARACTER VARYING(11)": "'(99)999999999' (13)"; SQL statement:
+INSERT INTO public.cliente (cliente_id, cliente_nome, cliente_usuario, cliente_senha, cliente_email, cliente_cpf, cliente_dt_nasc, cliente_telefone, cliente_end_completo, cliente_cep) VALUES(5, 'Jumara', 'Jumar4', '123456', 'ju@gmail.com', '123456', '2005-10-12', '(99)999999999', 'Rua Pernambuco, nº 864, Santa Bárbara, Cariacica, ES', '29145006') [22001-212]
+2022-06-02 16:06:35 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "CLIENTE_TELEFONE CHARACTER VARYING(11)": "'(10000077777' (12)"; SQL statement:
+INSERT INTO public.cliente (cliente_id, cliente_nome, cliente_usuario, cliente_senha, cliente_email, cliente_cpf, cliente_dt_nasc, cliente_telefone, cliente_end_completo, cliente_cep) VALUES(4, 'Aminadabe', 'amina', 'dabe', 'amina@da.be', '555', '1995-03-21', '(10000077777', 'Travessa São Mateus, nº 499, Parreão, Fortaleza, CE', '60410316') [22001-212]
