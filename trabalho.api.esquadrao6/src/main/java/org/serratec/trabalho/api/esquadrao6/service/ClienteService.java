@@ -134,6 +134,8 @@ public class ClienteService {
 
 	}
 
+	teste github {}
+
 	public void salvarListaCLiente(List<ClienteDTO> listaClienteDTO){
 		List<Cliente> listaCliente = new ArrayList<>();
 		for (ClienteDTO clienteDTO : listaClienteDTO){
