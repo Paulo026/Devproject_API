@@ -19,16 +19,16 @@ public class MovimentacaoItemController {
     //CRUD
 
     //Movimentações da loja
-    @PostMapping("/comprar")
+    @PostMapping("/movimentar")
     public ResponseEntity<String> comprarProduto (@RequestBody MovimentacaoItemDTO dtoMovItem) {
 
-        return ResponseEntity.ok(movimentacaoItemService.comprarProduto(dtoMovItem));
+        return ResponseEntity.ok(movimentacaoItemService.movimentarProduto(dtoMovItem));
     }
 
-    @PostMapping("/vender")
-    public ResponseEntity<String> venderProduto (@RequestBody MovimentacaoItemDTO dtoMovItem) {
-        return ResponseEntity.ok(movimentacaoItemService.venderProduto(dtoMovItem));
-    }
+//    @PostMapping("/vender")
+//    public ResponseEntity<String> venderProduto (@RequestBody MovimentacaoItemDTO dtoMovItem) {
+//        return ResponseEntity.ok(movimentacaoItemService.venderProduto(dtoMovItem));
+//    }
 
     //Relatórios
     @GetMapping("/relatorio/maisVendidos")
