@@ -6,12 +6,11 @@ import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
-@Table(name = "FUNCIONARIO")
+@Table(name = "funcionario")
 public class Funcionario {
     //Atributos da tabela (sem relações)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     @Column(name = "funcionario_id")
     private Integer FuncionarioId;
 
@@ -21,7 +20,7 @@ public class Funcionario {
     private String funcionarioNome;
 
     @NotNull
-    @Column(name = "funcionario_cpf")
+    @Column(name = "funcionario_cpf") //TODO colocar CPF como único
     @Size(min = 11, max = 11)
     private String funcionarioCpf;
 

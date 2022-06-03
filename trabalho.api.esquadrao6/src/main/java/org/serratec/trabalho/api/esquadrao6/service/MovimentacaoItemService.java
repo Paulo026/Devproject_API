@@ -20,10 +20,13 @@ public class MovimentacaoItemService {
     MovimentacaoItemRepository movItemRepository;
 
     @Autowired
-    ClienteRepository cliente;
+    ClienteRepository clienteRepository;
 
     @Autowired
-    ProdutoRepository produto;
+    ProdutoRepository produtoRepository;
+
+    @Autowired
+    ProdutoService produtoService;
 
     @Autowired
     EmailService email;
@@ -41,7 +44,7 @@ public class MovimentacaoItemService {
         return dtoMovItem;
     }
 
-    public List<MovimentacaoItemDTO> buscarTodasMovimentacoes (Integer movID) {
+    public List<MovimentacaoItemDTO> buscarTodasMovimentacoes(Integer movID) {
         List<MovimentacaoItem> listaMov = movItemRepository.findAll();
         List<MovimentacaoItemDTO> dtoListaMov = new ArrayList<>();
 
@@ -53,7 +56,26 @@ public class MovimentacaoItemService {
         return dtoListaMov;
     }
 
+    //Movimentos da Loja
+    public String comprarProduto(MovimentacaoItemDTO dtoMovItem) { //TODO registra o movimento, mas não diminui o estoque
+        MovimentacaoItem movItem = new MovimentacaoItem();
+        movimentacaoDTOModel(movItem, dtoMovItem);
 
+        movItemRepository.save(movItem);
+        produtoService.atualizarEstoque(dtoMovItem.getProdutoID(), dtoMovItem.getMovimentacaoQuantidade());
+
+        return "Compra registrada com sucesso!";
+    }
+
+    public String venderProduto(MovimentacaoItemDTO dtoMovItem) { //TODO registra o movimento, mas não diminui o estoque
+        MovimentacaoItem movItem = new MovimentacaoItem();
+        movimentacaoDTOModel(movItem, dtoMovItem);
+
+        movItemRepository.save(movItem);
+        produtoService.atualizarEstoque(dtoMovItem.getProdutoID(), -(dtoMovItem.getMovimentacaoQuantidade()));
+
+        return "Venda registrada com sucesso!";
+    }
 
     //Relatórios
     public List<RelatorioDTO> relatorioProdutosMaisVendidos() {
@@ -83,8 +105,8 @@ public class MovimentacaoItemService {
         movItem.setMovimentacaoValorUnitario(dtoMovItem.getMovimentacaoValorUnitario());
         movItem.setMovimentacaoNumeroDocumento(dtoMovItem.getMovimentacaoNumeroDocumento());
 
-        movItem.setCliente(cliente.findById(dtoMovItem.getClienteID()).get());
-        movItem.setProduto(produto.findById(dtoMovItem.getProdutoID()).get());
+        movItem.setCliente(clienteRepository.findById(dtoMovItem.getClienteID()).get());
+        movItem.setProduto(produtoRepository.findById(dtoMovItem.getProdutoID()).get());
 
         return movItem;
     }

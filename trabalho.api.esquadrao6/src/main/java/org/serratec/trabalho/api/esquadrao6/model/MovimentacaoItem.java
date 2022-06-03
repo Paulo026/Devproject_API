@@ -11,7 +11,6 @@ public class MovimentacaoItem {
     //Atributos da tabela (sem relações)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     @Column(name = "item_mov_id")
     private Integer movimentacaoID;
 

@@ -7,12 +7,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "PRODUTO")
+@Table(name = "produto")
 public class Produto {
     //Atributos da tabela (sem relações)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     @Column(name = "produto_id")
     private Integer produtoId;
 

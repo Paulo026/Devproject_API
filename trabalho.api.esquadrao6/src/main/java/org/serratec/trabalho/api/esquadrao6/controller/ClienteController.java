@@ -28,7 +28,7 @@ public class ClienteController {
         return ResponseEntity.ok(clienteService.buscarporId(idCliente));
     }
 
-    @DeleteMapping("/{idcliente}")
+    @DeleteMapping("/{idCliente}")
     public ResponseEntity<Void> deletar(@PathVariable Integer idCliente){
         clienteService.deletar(idCliente);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);

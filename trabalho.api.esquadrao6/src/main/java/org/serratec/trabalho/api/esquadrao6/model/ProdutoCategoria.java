@@ -11,7 +11,6 @@ public class ProdutoCategoria {
     //Atributos da tabela (sem relações)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     @Column(name = "categoria_id")
     private Integer categoriaId;
 
