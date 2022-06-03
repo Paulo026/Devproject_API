@@ -19,7 +19,7 @@ public class ClienteController {
     ClienteService clienteService;
 
     @PostMapping("/salvar")
-    public ResponseEntity<String> salvar(@RequestBody ClienteDTO clienteDTO){
+    public ResponseEntity<String> salvar(@RequestBody ClienteDTO clienteDTO) throws ClienteException{
         return ResponseEntity.ok(clienteService.salvar(clienteDTO));
     }
 
