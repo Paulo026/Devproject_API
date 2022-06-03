@@ -20,7 +20,7 @@ public class ClienteService {
 	
 	//código = id
 	// verificar se há erro
-	public String salvar(ClienteDTO clienteDTO) {
+	public String salvar(ClienteDTO clienteDTO) throws ClienteException {
 		Cliente cliente = new Cliente();
 		transformarDTOEmModel(clienteDTO, cliente);
 		clienteRepository.save(cliente);
@@ -155,9 +155,6 @@ public class ClienteService {
 	}
 
 	public void salvarListaCLiente(List<ClienteDTO> listaClienteDTO) throws ClienteException {
-
-
-	public void salvarListaCLiente(List<ClienteDTO> listaClienteDTO){
 
 		List<Cliente> listaCliente = new ArrayList<>();
 		for (ClienteDTO clienteDTO : listaClienteDTO){

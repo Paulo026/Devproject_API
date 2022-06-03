@@ -1,16 +1,15 @@
 package org.serratec.trabalho.api.esquadrao6.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.serratec.trabalho.api.esquadrao6.dto.ProdutoCategoriaDTO;
-import org.serratec.trabalho.api.esquadrao6.exception.ClienteException;
 import org.serratec.trabalho.api.esquadrao6.exception.ProdutoCategoriaException;
 import org.serratec.trabalho.api.esquadrao6.model.ProdutoCategoria;
 import org.serratec.trabalho.api.esquadrao6.repository.ProdutoCategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProdutoCategoriaService {
@@ -35,17 +34,15 @@ public class ProdutoCategoriaService {
             throw new ProdutoCategoriaException("A descrição da categoria não foi informada");
         }
 
-    public ProdutoCategoria transformarDTOEmModel(ProdutoCategoria produtoCategoria, ProdutoCategoriaDTO produtoCategoriaDTO){
-
         produtoCategoria.setCategoriaNome(produtoCategoriaDTO.getCategoriaNome());
         produtoCategoria.setCategoriaDescricao(produtoCategoriaDTO.getCategoriaDescricao());
 
         return produtoCategoria;
     }
 
-    public String salvar(ProdutoCategoriaDTO produtoCategoriaDTO){
+    public String salvar(ProdutoCategoriaDTO produtoCategoriaDTO) throws ProdutoCategoriaException{
         ProdutoCategoria produtoCategoria = new ProdutoCategoria();
-        transformarDTOEmModel(produtoCategoria, produtoCategoriaDTO);
+        transformarDTOEmMOdel(produtoCategoria, produtoCategoriaDTO);
         produtoCategoriaRepository.save(produtoCategoria);
         return "A categoria foi criada com suceso, seu códgo é: " +produtoCategoria.getCategoriaId();
     }
@@ -100,7 +97,7 @@ public class ProdutoCategoriaService {
         List<ProdutoCategoria> listaProdutoCategoria = new ArrayList<>();
         for(ProdutoCategoriaDTO produtoCategoriaDTO : listaProdutoCategoriaDTO){
             ProdutoCategoria produtoCategoria = new ProdutoCategoria();
-            transformarDTOEmModel(produtoCategoria, produtoCategoriaDTO);
+            transformarDTOEmMOdel(produtoCategoria, produtoCategoriaDTO);
             listaProdutoCategoria.add(produtoCategoria);
         }
         produtoCategoriaRepository.saveAll(listaProdutoCategoria);

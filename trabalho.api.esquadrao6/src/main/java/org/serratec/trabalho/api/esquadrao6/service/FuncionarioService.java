@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.serratec.trabalho.api.esquadrao6.dto.FuncionarioDTO;
-import org.serratec.trabalho.api.esquadrao6.exception.ClienteException;
 import org.serratec.trabalho.api.esquadrao6.exception.FuncionarioException;
 import org.serratec.trabalho.api.esquadrao6.model.Funcionario;
 import org.serratec.trabalho.api.esquadrao6.repository.FuncionarioRepository;

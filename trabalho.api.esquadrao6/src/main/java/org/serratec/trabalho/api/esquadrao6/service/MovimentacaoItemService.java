@@ -23,20 +23,17 @@ public class MovimentacaoItemService {
     ClienteRepository clienteRepository;
 
     @Autowired
-
     ProdutoService produtoService;
 
     @Autowired
     ProdutoRepository produtoRepository;
-
-    ProdutoRepository produtoRepository;
-
-    @Autowired
-    ProdutoService produtoService;
-
 
     @Autowired
     EmailService email;
+
+ 
+
+
 
     //CRUD
     public MovimentacaoItemDTO buscarMovimentacaoPorID(Integer movID) {
@@ -114,8 +111,8 @@ public class MovimentacaoItemService {
         movItem.setMovimentacaoNumeroDocumento(dtoMovItem.getMovimentacaoNumeroDocumento());
 
 
-        movItem.setCliente(clienteRepository.findById(DTOMovItem.getClienteID()).get());
-        movItem.setProduto(produtoRepository.findById(DTOMovItem.getProdutoID()).get());
+        movItem.setCliente(clienteRepository.findById(dtoMovItem.getClienteID()).get());
+        movItem.setProduto(produtoRepository.findById(dtoMovItem.getProdutoID()).get());
 
         movItem.setCliente(clienteRepository.findById(dtoMovItem.getClienteID()).get());
         movItem.setProduto(produtoRepository.findById(dtoMovItem.getProdutoID()).get());

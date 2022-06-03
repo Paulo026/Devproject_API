@@ -19,7 +19,7 @@ public class ProdutoCategoriaController {
     ProdutoCategoriaService produtoCategoriaService;
 
     @PostMapping("/salvar")
-    public ResponseEntity<String> salvar(@RequestBody ProdutoCategoriaDTO produtoCategoriaDTO){
+    public ResponseEntity<String> salvar(@RequestBody ProdutoCategoriaDTO produtoCategoriaDTO) throws ProdutoCategoriaException{
         return ResponseEntity.ok(produtoCategoriaService.salvar(produtoCategoriaDTO));
     }
 
