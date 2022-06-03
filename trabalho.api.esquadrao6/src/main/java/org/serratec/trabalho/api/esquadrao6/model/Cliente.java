@@ -13,7 +13,6 @@ public class Cliente {
     //Atributos da tabela (sem relações)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     @Column(name = "cliente_id")
     private Integer clienteId;
 

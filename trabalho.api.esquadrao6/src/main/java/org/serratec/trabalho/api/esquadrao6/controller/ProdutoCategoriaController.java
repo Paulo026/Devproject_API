@@ -1,12 +1,8 @@
 package org.serratec.trabalho.api.esquadrao6.controller;
 
 
-
-
-import org.serratec.trabalho.api.esquadrao6.dto.ClienteDTO;
 import org.serratec.trabalho.api.esquadrao6.dto.ProdutoCategoriaDTO;
 import org.serratec.trabalho.api.esquadrao6.exception.ProdutoCategoriaException;
-import org.serratec.trabalho.api.esquadrao6.model.ProdutoCategoria;
 import org.serratec.trabalho.api.esquadrao6.service.ProdutoCategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,18 +23,18 @@ public class ProdutoCategoriaController {
         return ResponseEntity.ok(produtoCategoriaService.salvar(produtoCategoriaDTO));
     }
 
-    @GetMapping("/buscar/{idCliente}")
+    @GetMapping("/buscar/{categoriaId}")
     public ResponseEntity<ProdutoCategoriaDTO> buscarPorId(@PathVariable Integer categoriaId) throws ProdutoCategoriaException {
         return ResponseEntity.ok(produtoCategoriaService.buscarPorId(categoriaId));
     }
 
-    @DeleteMapping("/{idcliente}")
+    @DeleteMapping("/{categoriaId}")
     public ResponseEntity<Void> deletar(@PathVariable Integer categoriaId){
         produtoCategoriaService.deletar(categoriaId);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    @PutMapping("atualizar/{idCliente}")
+    @PutMapping("atualizar/{categoriaId}")
     public ResponseEntity<String> atualizar(@PathVariable Integer categoriaId, @RequestBody ProdutoCategoriaDTO produtoCategoriaDTO)
             throws ProdutoCategoriaException {
         return ResponseEntity.ok(produtoCategoriaService.atualizar(categoriaId, produtoCategoriaDTO));

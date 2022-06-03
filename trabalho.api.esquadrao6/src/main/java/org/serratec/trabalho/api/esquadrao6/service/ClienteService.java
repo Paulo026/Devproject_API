@@ -22,7 +22,7 @@ public class ClienteService {
 	// verificar se há erro
 	public String salvar(ClienteDTO clienteDTO) {
 		Cliente cliente = new Cliente();
-		transformarModelEmDTO(cliente, clienteDTO);
+		transformarDTOEmModel(clienteDTO, cliente);
 		clienteRepository.save(cliente);
 		return "O cliente foi cadastrado com sucesso, seu código é: " + cliente.getClienteId();
 	}
@@ -39,8 +39,8 @@ public class ClienteService {
 		throw new ClienteException("O cliente com o código informado não foi encontrado");
 	}
 	
-	public void deletar(Integer clienteId) {
-		clienteRepository.deleteById(clienteId);
+	public void deletar(Integer idCliente) {
+		clienteRepository.deleteById(idCliente);
 	}
 	
 	public String atualizar(Integer clienteId, ClienteDTO clienteDTO) throws ClienteException{

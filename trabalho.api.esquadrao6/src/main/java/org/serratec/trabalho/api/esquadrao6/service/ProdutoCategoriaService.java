@@ -24,7 +24,7 @@ public class ProdutoCategoriaService {
 
         return produtoCategoriaDTO;
     }
-    public ProdutoCategoria transformarDTOEmMOdel(ProdutoCategoria produtoCategoria, ProdutoCategoriaDTO produtoCategoriaDTO){
+    public ProdutoCategoria transformarDTOEmModel(ProdutoCategoria produtoCategoria, ProdutoCategoriaDTO produtoCategoriaDTO){
         produtoCategoria.setCategoriaNome(produtoCategoriaDTO.getCategoriaNome());
         produtoCategoria.setCategoriaDescricao(produtoCategoriaDTO.getCategoriaDescricao());
 
@@ -33,7 +33,7 @@ public class ProdutoCategoriaService {
 
     public String salvar(ProdutoCategoriaDTO produtoCategoriaDTO){
         ProdutoCategoria produtoCategoria = new ProdutoCategoria();
-        transformarModelEmDTO(produtoCategoria, produtoCategoriaDTO);
+        transformarDTOEmModel(produtoCategoria, produtoCategoriaDTO);
         produtoCategoriaRepository.save(produtoCategoria);
         return "A categoria foi criada com suceso, seu códgo é: " +produtoCategoria.getCategoriaId();
     }
@@ -88,7 +88,7 @@ public class ProdutoCategoriaService {
         List<ProdutoCategoria> listaProdutoCategoria = new ArrayList<>();
         for(ProdutoCategoriaDTO produtoCategoriaDTO : listaProdutoCategoriaDTO){
             ProdutoCategoria produtoCategoria = new ProdutoCategoria();
-            transformarDTOEmMOdel(produtoCategoria, produtoCategoriaDTO);
+            transformarDTOEmModel(produtoCategoria, produtoCategoriaDTO);
             listaProdutoCategoria.add(produtoCategoria);
         }
         produtoCategoriaRepository.saveAll(listaProdutoCategoria);
