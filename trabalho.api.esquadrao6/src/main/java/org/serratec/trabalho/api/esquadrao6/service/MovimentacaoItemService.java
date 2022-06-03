@@ -23,10 +23,17 @@ public class MovimentacaoItemService {
     ClienteRepository clienteRepository;
 
     @Autowired
+
+    ProdutoService produtoService;
+
+    @Autowired
+    ProdutoRepository produtoRepository;
+
     ProdutoRepository produtoRepository;
 
     @Autowired
     ProdutoService produtoService;
+
 
     @Autowired
     EmailService email;
@@ -77,6 +84,7 @@ public class MovimentacaoItemService {
         return "Venda registrada com sucesso!";
     }
 
+
     //Relatórios
     public List<RelatorioDTO> relatorioProdutosMaisVendidos() {
         return movItemRepository.relatorioProdutosMaisVendidos();
@@ -105,8 +113,13 @@ public class MovimentacaoItemService {
         movItem.setMovimentacaoValorUnitario(dtoMovItem.getMovimentacaoValorUnitario());
         movItem.setMovimentacaoNumeroDocumento(dtoMovItem.getMovimentacaoNumeroDocumento());
 
+
+        movItem.setCliente(clienteRepository.findById(DTOMovItem.getClienteID()).get());
+        movItem.setProduto(produtoRepository.findById(DTOMovItem.getProdutoID()).get());
+
         movItem.setCliente(clienteRepository.findById(dtoMovItem.getClienteID()).get());
         movItem.setProduto(produtoRepository.findById(dtoMovItem.getProdutoID()).get());
+
 
         return movItem;
     }

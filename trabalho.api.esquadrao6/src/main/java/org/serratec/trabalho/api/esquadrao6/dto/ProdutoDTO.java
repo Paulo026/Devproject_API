@@ -22,7 +22,6 @@ public class ProdutoDTO {
     public ProdutoDTO() {
     }
 
-    //Getters e Setters
     public Integer getProdutoId() {
         return produtoId;
     }
@@ -110,4 +109,7 @@ public class ProdutoDTO {
     public void setFuncionarioNome(String funcionarioNome) {
         this.funcionarioNome = funcionarioNome;
     }
+
 }
+
+

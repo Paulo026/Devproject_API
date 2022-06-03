@@ -46,7 +46,7 @@ public class ClienteController {
     }
 
     @PostMapping("/salvar-lista")
-    public ResponseEntity<Void> salvatLista(@RequestBody List<ClienteDTO> listaClienteDTO){
+    public ResponseEntity<Void> salvatLista(@RequestBody List<ClienteDTO> listaClienteDTO) throws ClienteException {
         clienteService.salvarListaCLiente(listaClienteDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

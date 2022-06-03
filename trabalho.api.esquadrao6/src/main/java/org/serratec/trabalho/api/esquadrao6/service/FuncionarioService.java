@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.serratec.trabalho.api.esquadrao6.dto.FuncionarioDTO;
+import org.serratec.trabalho.api.esquadrao6.exception.ClienteException;
 import org.serratec.trabalho.api.esquadrao6.exception.FuncionarioException;
 import org.serratec.trabalho.api.esquadrao6.model.Funcionario;
 import org.serratec.trabalho.api.esquadrao6.repository.FuncionarioRepository;
@@ -17,7 +18,7 @@ public class FuncionarioService {
 	@Autowired
 	FuncionarioRepository funcionarioRepository;
 
-	public String salvar(FuncionarioDTO funcionarioDTO) {
+	public String salvar(FuncionarioDTO funcionarioDTO) throws FuncionarioException {
 		Funcionario funcionario = new Funcionario();
 		transformarDTOEmModel(funcionario, funcionarioDTO);
 		funcionarioRepository.save(funcionario);
@@ -69,7 +70,7 @@ public class FuncionarioService {
 		return listaDTO;
 	}
 
-	public void salvarListaFuncionario(List<FuncionarioDTO> listaDTO) {
+	public void salvarListaFuncionario(List<FuncionarioDTO> listaDTO) throws FuncionarioException {
 		List<Funcionario> listaFuncionario = new ArrayList<>();
 
 		for (FuncionarioDTO funcionarioDTO : listaDTO) {
@@ -88,9 +89,17 @@ public class FuncionarioService {
 		return funcionarioDTO;
 	}
 
-	public Funcionario transformarDTOEmModel(Funcionario funcionario, FuncionarioDTO funcionarioDTO) {
+	public Funcionario transformarDTOEmModel(Funcionario funcionario, FuncionarioDTO funcionarioDTO) throws FuncionarioException{
+		if(funcionarioDTO.getFuncionarioNome() == null){
+			throw new FuncionarioException("O nome do funcionário não foi informado");
+		}
+		if(funcionarioDTO.getFuncionarioCpf() == null){
+			throw new FuncionarioException("O cpf do funcionário não foi informado");
+		}
+
 		funcionario.setFuncionarioNome(funcionarioDTO.getFuncionarioNome());
 		funcionario.setFuncionarioCpf(funcionarioDTO.getFuncionarioCpf());
+
 		return funcionario;
 	}
 }

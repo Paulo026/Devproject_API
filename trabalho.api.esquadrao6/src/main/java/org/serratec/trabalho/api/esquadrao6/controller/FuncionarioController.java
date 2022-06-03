@@ -26,7 +26,7 @@ public class FuncionarioController {
 
     //verificar erro
     @PostMapping("/salvar")
-    public ResponseEntity<String> salvar(@RequestBody FuncionarioDTO funcionarioDTO){
+    public ResponseEntity<String> salvar(@RequestBody FuncionarioDTO funcionarioDTO) throws FuncionarioException {
         return ResponseEntity.ok(funcionarioService.salvar(funcionarioDTO));
     }
 
@@ -53,7 +53,7 @@ public class FuncionarioController {
     }
 
     @PostMapping("/salvar-lista")
-    public ResponseEntity<Void> salvarLista(@RequestBody List<FuncionarioDTO> listafuncionarioDTO){
+    public ResponseEntity<Void> salvarLista(@RequestBody List<FuncionarioDTO> listafuncionarioDTO) throws FuncionarioException {
         funcionarioService.salvarListaFuncionario(listafuncionarioDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

@@ -22,8 +22,6 @@ public class MovimentacaoItemController {
     @PostMapping("/comprar")
     public ResponseEntity<String> comprarProduto (@RequestBody MovimentacaoItemDTO dtoMovItem) {
 
-
-
         return ResponseEntity.ok(movimentacaoItemService.comprarProduto(dtoMovItem));
     }
 
@@ -37,5 +35,6 @@ public class MovimentacaoItemController {
     public List<RelatorioDTO> relatorioProdutosMaisVendidos() {
         return movimentacaoItemService.relatorioProdutosMaisVendidos();
     }
+
 
 }

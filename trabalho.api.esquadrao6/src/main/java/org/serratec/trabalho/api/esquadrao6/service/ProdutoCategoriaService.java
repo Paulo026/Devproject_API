@@ -1,6 +1,7 @@
 package org.serratec.trabalho.api.esquadrao6.service;
 
 import org.serratec.trabalho.api.esquadrao6.dto.ProdutoCategoriaDTO;
+import org.serratec.trabalho.api.esquadrao6.exception.ClienteException;
 import org.serratec.trabalho.api.esquadrao6.exception.ProdutoCategoriaException;
 import org.serratec.trabalho.api.esquadrao6.model.ProdutoCategoria;
 import org.serratec.trabalho.api.esquadrao6.repository.ProdutoCategoriaRepository;
@@ -24,7 +25,18 @@ public class ProdutoCategoriaService {
 
         return produtoCategoriaDTO;
     }
+
+    public ProdutoCategoria transformarDTOEmMOdel(ProdutoCategoria produtoCategoria, ProdutoCategoriaDTO produtoCategoriaDTO)
+    throws ProdutoCategoriaException {
+        if(produtoCategoriaDTO.getCategoriaNome() == null) {
+            throw new ProdutoCategoriaException("O nome da categoria não foi informado");
+        }
+        if(produtoCategoriaDTO.getCategoriaDescricao() == null) {
+            throw new ProdutoCategoriaException("A descrição da categoria não foi informada");
+        }
+
     public ProdutoCategoria transformarDTOEmModel(ProdutoCategoria produtoCategoria, ProdutoCategoriaDTO produtoCategoriaDTO){
+
         produtoCategoria.setCategoriaNome(produtoCategoriaDTO.getCategoriaNome());
         produtoCategoria.setCategoriaDescricao(produtoCategoriaDTO.getCategoriaDescricao());
 
@@ -84,7 +96,7 @@ public class ProdutoCategoriaService {
         return listaProdutoCategoriaDTO;
     }
 
-    public void salvarListaCategoria(List<ProdutoCategoriaDTO> listaProdutoCategoriaDTO){
+    public void salvarListaCategoria(List<ProdutoCategoriaDTO> listaProdutoCategoriaDTO) throws ProdutoCategoriaException {
         List<ProdutoCategoria> listaProdutoCategoria = new ArrayList<>();
         for(ProdutoCategoriaDTO produtoCategoriaDTO : listaProdutoCategoriaDTO){
             ProdutoCategoria produtoCategoria = new ProdutoCategoria();

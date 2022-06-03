@@ -46,7 +46,7 @@ public class ProdutoCategoriaController {
     }
 
     @PostMapping("/salvar-lista")
-    public ResponseEntity<Void> salvatLista(@RequestBody List<ProdutoCategoriaDTO> listaProdutoCategoriaDTO){
+    public ResponseEntity<Void> salvatLista(@RequestBody List<ProdutoCategoriaDTO> listaProdutoCategoriaDTO) throws ProdutoCategoriaException {
         produtoCategoriaService.salvarListaCategoria(listaProdutoCategoriaDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
