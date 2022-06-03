@@ -61,25 +61,25 @@ public class MovimentacaoItemService {
     }
 
     //Movimentos da Loja
-    public String comprarProduto(MovimentacaoItemDTO dtoMovItem) { //TODO registra o movimento, mas não diminui o estoque
+    public String movimentarProduto(MovimentacaoItemDTO dtoMovItem) { //TODO registra o movimento, mas não diminui o estoque
         MovimentacaoItem movItem = new MovimentacaoItem();
         movimentacaoDTOModel(movItem, dtoMovItem);
 
         movItemRepository.save(movItem);
-        produtoService.atualizarEstoque(dtoMovItem.getProdutoID(), dtoMovItem.getMovimentacaoQuantidade());
+        produtoService.atualizarEstoque(movItem.getProduto().getProdutoId(), dtoMovItem);
 
         return "Compra registrada com sucesso!";
     }
 
-    public String venderProduto(MovimentacaoItemDTO dtoMovItem) { //TODO registra o movimento, mas não diminui o estoque
-        MovimentacaoItem movItem = new MovimentacaoItem();
-        movimentacaoDTOModel(movItem, dtoMovItem);
-
-        movItemRepository.save(movItem);
-        produtoService.atualizarEstoque(dtoMovItem.getProdutoID(), -(dtoMovItem.getMovimentacaoQuantidade()));
-
-        return "Venda registrada com sucesso!";
-    }
+//    public String venderProduto(MovimentacaoItemDTO dtoMovItem) { //TODO registra o movimento, mas não diminui o estoque
+//        MovimentacaoItem movItem = new MovimentacaoItem();
+//        movimentacaoDTOModel(movItem, dtoMovItem);
+//
+//        movItemRepository.save(movItem);
+//        produtoService.atualizarEstoque(dtoMovItem.getProdutoID(), -(dtoMovItem.getMovimentacaoQuantidade()));
+//
+//        return "Venda registrada com sucesso!";
+//    }
 
 
     //Relatórios
