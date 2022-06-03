@@ -1,15 +1,15 @@
 package org.serratec.trabalho.api.esquadrao6.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import org.serratec.trabalho.api.esquadrao6.dto.ClienteDTO;
 import org.serratec.trabalho.api.esquadrao6.exception.ClienteException;
 import org.serratec.trabalho.api.esquadrao6.model.Cliente;
 import org.serratec.trabalho.api.esquadrao6.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClienteService {
@@ -22,7 +22,7 @@ public class ClienteService {
 	// verificar se há erro
 	public String salvar(ClienteDTO clienteDTO) {
 		Cliente cliente = new Cliente();
-		transformarModelEmDTO(cliente, clienteDTO);
+		transformarDTOEmModel(clienteDTO, cliente);
 		clienteRepository.save(cliente);
 		return "O cliente foi cadastrado com sucesso, seu código é: " + cliente.getClienteId();
 	}
@@ -39,8 +39,8 @@ public class ClienteService {
 		throw new ClienteException("O cliente com o código informado não foi encontrado");
 	}
 	
-	public void deletar(Integer clienteId) {
-		clienteRepository.deleteById(clienteId);
+	public void deletar(Integer idCliente) {
+		clienteRepository.deleteById(idCliente);
 	}
 	
 	public String atualizar(Integer clienteId, ClienteDTO clienteDTO) throws ClienteException{
@@ -155,6 +155,10 @@ public class ClienteService {
 	}
 
 	public void salvarListaCLiente(List<ClienteDTO> listaClienteDTO) throws ClienteException {
+
+
+	public void salvarListaCLiente(List<ClienteDTO> listaClienteDTO){
+
 		List<Cliente> listaCliente = new ArrayList<>();
 		for (ClienteDTO clienteDTO : listaClienteDTO){
 			Cliente cliente = new Cliente();

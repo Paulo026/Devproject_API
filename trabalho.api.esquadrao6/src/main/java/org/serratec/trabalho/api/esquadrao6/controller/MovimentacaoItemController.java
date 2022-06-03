@@ -21,6 +21,7 @@ public class MovimentacaoItemController {
     //Movimentações da loja
     @PostMapping("/comprar")
     public ResponseEntity<String> comprarProduto (@RequestBody MovimentacaoItemDTO dtoMovItem) {
+
         return ResponseEntity.ok(movimentacaoItemService.comprarProduto(dtoMovItem));
     }
 
