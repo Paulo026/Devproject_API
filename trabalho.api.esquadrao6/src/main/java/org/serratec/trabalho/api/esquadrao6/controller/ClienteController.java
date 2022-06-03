@@ -28,7 +28,7 @@ public class ClienteController {
         return ResponseEntity.ok(clienteService.buscarporId(idCliente));
     }
 
-    @DeleteMapping("/{idcliente}")
+    @DeleteMapping("/{idCliente}")
     public ResponseEntity<Void> deletar(@PathVariable Integer idCliente){
         clienteService.deletar(idCliente);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
@@ -46,7 +46,7 @@ public class ClienteController {
     }
 
     @PostMapping("/salvar-lista")
-    public ResponseEntity<Void> salvatLista(@RequestBody List<ClienteDTO> listaClienteDTO){
+    public ResponseEntity<Void> salvatLista(@RequestBody List<ClienteDTO> listaClienteDTO) throws ClienteException {
         clienteService.salvarListaCLiente(listaClienteDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

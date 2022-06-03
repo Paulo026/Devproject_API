@@ -32,13 +32,13 @@ public class ProdutoCategoriaController {
         return ResponseEntity.ok(produtoCategoriaService.buscarPorId(categoriaId));
     }
 
-    @DeleteMapping("/{idcliente}")
+    @DeleteMapping("/{categoriaId}")
     public ResponseEntity<Void> deletar(@PathVariable Integer categoriaId){
         produtoCategoriaService.deletar(categoriaId);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    @PutMapping("atualizar/{idCliente}")
+    @PutMapping("atualizar/{categoriaId}")
     public ResponseEntity<String> atualizar(@PathVariable Integer categoriaId, @RequestBody ProdutoCategoriaDTO produtoCategoriaDTO)
             throws ProdutoCategoriaException {
         return ResponseEntity.ok(produtoCategoriaService.atualizar(categoriaId, produtoCategoriaDTO));
@@ -50,7 +50,7 @@ public class ProdutoCategoriaController {
     }
 
     @PostMapping("/salvar-lista")
-    public ResponseEntity<Void> salvatLista(@RequestBody List<ProdutoCategoriaDTO> listaProdutoCategoriaDTO){
+    public ResponseEntity<Void> salvatLista(@RequestBody List<ProdutoCategoriaDTO> listaProdutoCategoriaDTO) throws ProdutoCategoriaException {
         produtoCategoriaService.salvarListaCategoria(listaProdutoCategoriaDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

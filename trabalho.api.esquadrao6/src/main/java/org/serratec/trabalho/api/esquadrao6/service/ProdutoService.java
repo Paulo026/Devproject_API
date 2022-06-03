@@ -33,13 +33,36 @@ public class ProdutoService {
 		produtoDTO.setProdutoDataFabricacao(produto.getProdutoDataFabricacao());
 		produtoDTO.setProdutoDataValidade(produto.getProdutoDataValidade());
 		produtoDTO.setProdutoValorUnitario(produto.getProdutoValorUnitario());
+		produtoDTO.setCategoriaID(produto.getProdutoCategoria().getCategoriaId());
+		produtoDTO.setCategoriaNome(produto.getProdutoCategoria().getCategoriaNome());
+		produtoDTO.setFuncionarioID(produto.getFuncionario().getFuncionarioId());
+		produtoDTO.setFuncionarioNome(produto.getFuncionario().getFuncionarioNome());
 
 		//Verificar ligações
 		return produtoDTO;
 	}
 	
 	//Verificar ligações
-	public Produto transformarDTOEmModel(Produto produto, ProdutoDTO produtoDTO) {
+	public Produto transformarDTOEmModel(Produto produto, ProdutoDTO produtoDTO) throws ProdutoException{
+		if(produtoDTO.getProdutoNome() == null){
+			throw new ProdutoException("O nome do produto não foi informado");
+		}
+		if(produtoDTO.getProdutoDescricao() == null){
+			throw new ProdutoException("A descrição não foi informada");
+		}
+		if(produtoDTO.getProdutoQuantidadeEstoque() == null){
+			throw new ProdutoException("A quantidade em estoque não foi informada");
+		}
+		if(produtoDTO.getProdutoDataFabricacao() == null){
+			throw new ProdutoException("A data de fabricação não foi informada");
+		}
+		if(produtoDTO.getProdutoDataValidade() == null){
+			throw new ProdutoException("A data de validade não foi informada");
+		}
+		if(produtoDTO.getProdutoValorUnitario() == null){
+			throw new ProdutoException("O valor unitário não foi informado");
+		}
+
 		produto.setProdutoNome(produtoDTO.getProdutoNome());
 		produto.setProdutoDescricao(produtoDTO.getProdutoDescricao());
 		produto.setProdutoQuantidadeEstoque(produtoDTO.getProdutoQuantidadeEstoque());
@@ -57,7 +80,7 @@ public class ProdutoService {
 		return produto;
 	}
 	
-	public String salvar(ProdutoDTO produtoDTO) {
+	public String salvar(ProdutoDTO produtoDTO) throws ProdutoException {
 		Produto produto = new Produto();
 		transformarDTOEmModel(produto, produtoDTO);
 		produtoRepository.save(produto);
@@ -108,6 +131,19 @@ public class ProdutoService {
 		}
 		throw new ProdutoException("O produto não foi atualizado.");
 	}
+
+	public void atualizarEstoque(Integer idProduto, Integer qtProduto) {
+		ProdutoDTO produtoDTO = new ProdutoDTO();
+		Optional<Produto> produto = produtoRepository.findById(idProduto);
+		Produto produtoBanco = new Produto();
+		if (produto.isPresent()) {
+			produtoBanco = produto.get();
+			if (produtoDTO.getProdutoQuantidadeEstoque() != null) {
+				produtoBanco.setProdutoQuantidadeEstoque(produtoDTO.getProdutoQuantidadeEstoque() + qtProduto);
+			}
+			produtoRepository.save(produtoBanco);
+		}
+	}
 	
 	public List<ProdutoDTO> buscarTodos(){
 		List<Produto> produtoListaModel = produtoRepository.findAll();
@@ -120,7 +156,7 @@ public class ProdutoService {
 		return produtoListaDTO;
 	}
 	
-	public void salvarListaProduto(List<ProdutoDTO> listaProdutoDTO) {
+	public void salvarListaProduto(List<ProdutoDTO> listaProdutoDTO) throws ProdutoException {
 		List<Produto> listaProduto = new ArrayList<>();
 		
 		for(ProdutoDTO produtoDTO : listaProdutoDTO) {

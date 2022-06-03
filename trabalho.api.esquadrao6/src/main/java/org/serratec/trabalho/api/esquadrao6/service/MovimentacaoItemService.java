@@ -9,6 +9,7 @@ import org.serratec.trabalho.api.esquadrao6.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,10 +20,13 @@ public class MovimentacaoItemService {
     MovimentacaoItemRepository movItemRepository;
 
     @Autowired
-    ClienteRepository cliente;
+    ClienteRepository clienteRepository;
 
     @Autowired
-    ProdutoRepository produto;
+    ProdutoService produtoService;
+
+    @Autowired
+    ProdutoRepository produtoRepository;
 
     @Autowired
     EmailService email;
@@ -38,6 +42,39 @@ public class MovimentacaoItemService {
             movimentacaoModelDTO(movSalva, DTOMovItem);
         }
         return DTOMovItem;
+    }
+
+    public List<MovimentacaoItemDTO> buscarTodasMovimentacoes(Integer movID) {
+        List<MovimentacaoItem> listaMov = movItemRepository.findAll();
+        List<MovimentacaoItemDTO> dtoListaMov = new ArrayList<>();
+
+        for (MovimentacaoItem movItem : listaMov) {
+            MovimentacaoItemDTO dtoMovItem = new MovimentacaoItemDTO();
+            movimentacaoDTOModel(movItem, dtoMovItem);
+            dtoListaMov.add(dtoMovItem);
+        }
+        return dtoListaMov;
+    }
+
+    //Movimentos da Loja
+    public String comprarProduto(MovimentacaoItemDTO dtoMovItem) { //TODO registra o movimento, mas não diminui o estoque
+        MovimentacaoItem movItem = new MovimentacaoItem();
+        movimentacaoDTOModel(movItem, dtoMovItem);
+
+        movItemRepository.save(movItem);
+        produtoService.atualizarEstoque(dtoMovItem.getProdutoID(), dtoMovItem.getMovimentacaoQuantidade());
+
+        return "Compra registrada com sucesso!";
+    }
+
+    public String venderProduto(MovimentacaoItemDTO dtoMovItem) { //TODO registra o movimento, mas não diminui o estoque
+        MovimentacaoItem movItem = new MovimentacaoItem();
+        movimentacaoDTOModel(movItem, dtoMovItem);
+
+        movItemRepository.save(movItem);
+        produtoService.atualizarEstoque(dtoMovItem.getProdutoID(), -(dtoMovItem.getMovimentacaoQuantidade()));
+
+        return "Venda registrada com sucesso!";
     }
 
 
@@ -69,8 +106,8 @@ public class MovimentacaoItemService {
         movItem.setMovimentacaoValorUnitario(DTOMovItem.getMovimentacaoValorUnitario());
         movItem.setMovimentacaoNumeroDocumento(DTOMovItem.getMovimentacaoNumeroDocumento());
 
-        movItem.setCliente(cliente.findById(DTOMovItem.getClienteID()).get());
-        movItem.setProduto(produto.findById(DTOMovItem.getProdutoID()).get());
+        movItem.setCliente(clienteRepository.findById(DTOMovItem.getClienteID()).get());
+        movItem.setProduto(produtoRepository.findById(DTOMovItem.getProdutoID()).get());
 
         return movItem;
     }

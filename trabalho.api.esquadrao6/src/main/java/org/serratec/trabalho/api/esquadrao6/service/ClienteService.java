@@ -106,7 +106,25 @@ public class ClienteService {
 		return clienteDTO;
 	}
 
-	public Cliente transformarDTOEmModel(ClienteDTO clienteDTO, Cliente cliente) {
+	public Cliente transformarDTOEmModel(ClienteDTO clienteDTO, Cliente cliente) throws ClienteException{
+		if(clienteDTO.getClienteNome() == null){
+			throw new ClienteException("O nome do cliente não foi informado");
+		}
+		if(clienteDTO.getClienteCpf() == null){
+			throw new ClienteException("O cpf do cliente não foi informado");
+		}
+		if(clienteDTO.getClienteUsuario() == null){
+			throw new ClienteException("O usuário do cliente não foi informado");
+		}
+		if(clienteDTO.getClienteSenha() == null){
+			throw new ClienteException("A senha do cliente não foi informada");
+		}
+		if(clienteDTO.getClienteEmail() == null){
+			throw new ClienteException("O e-mail do cliente não foi informado");
+		}
+		if(clienteDTO.getClienteEnderecoCompleto() == null){
+			throw new ClienteException("O endereço do cliente não foi informado");
+		}
 		cliente.setClienteNome(clienteDTO.getClienteNome());
 		cliente.setClienteUsuario(clienteDTO.getClienteUsuario());
 		cliente.setClienteSenha(clienteDTO.getClienteSenha());
@@ -118,7 +136,9 @@ public class ClienteService {
 		cliente.setClienteCep(clienteDTO.getClienteCep());
 
 		return cliente;
+
 	}
+
 
 	public List<ClienteDTO> buscarTodos(){
 		List<Cliente> listaClienteModel = clienteRepository.findAll();
@@ -134,7 +154,7 @@ public class ClienteService {
 
 	}
 
-	public void salvarListaCLiente(List<ClienteDTO> listaClienteDTO){
+	public void salvarListaCLiente(List<ClienteDTO> listaClienteDTO) throws ClienteException {
 		List<Cliente> listaCliente = new ArrayList<>();
 		for (ClienteDTO clienteDTO : listaClienteDTO){
 			Cliente cliente = new Cliente();
