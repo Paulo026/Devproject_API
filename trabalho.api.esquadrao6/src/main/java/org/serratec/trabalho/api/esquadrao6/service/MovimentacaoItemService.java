@@ -3,6 +3,7 @@ package org.serratec.trabalho.api.esquadrao6.service;
 import org.serratec.trabalho.api.esquadrao6.dto.MovimentacaoItemDTO;
 import org.serratec.trabalho.api.esquadrao6.dto.RelatorioDTO;
 import org.serratec.trabalho.api.esquadrao6.model.MovimentacaoItem;
+import org.serratec.trabalho.api.esquadrao6.model.Produto;
 import org.serratec.trabalho.api.esquadrao6.repository.ClienteRepository;
 import org.serratec.trabalho.api.esquadrao6.repository.MovimentacaoItemRepository;
 import org.serratec.trabalho.api.esquadrao6.repository.ProdutoRepository;
@@ -61,26 +62,34 @@ public class MovimentacaoItemService {
     }
 
     //Movimentos da Loja
-    public String movimentarProduto(MovimentacaoItemDTO dtoMovItem) { //TODO registra o movimento, mas não diminui o estoque
+    public String movimentarProduto(MovimentacaoItemDTO dtoMovItem) {
         MovimentacaoItem movItem = new MovimentacaoItem();
         movimentacaoDTOModel(movItem, dtoMovItem);
 
         movItemRepository.save(movItem);
-        produtoService.atualizarEstoque(movItem.getProduto().getProdutoId(), dtoMovItem);
 
-        return "Compra registrada com sucesso!";
+        Optional<Produto> produto = produtoRepository.findById(dtoMovItem.getProdutoID());
+        Produto produtoBanco = new Produto();
+        if (produto.isPresent()) {
+            produtoBanco = produto.get();
+            if (dtoMovItem.getMovimentacaoTipo().equals("COMPRA") || dtoMovItem.getMovimentacaoTipo().equals("Compra") || dtoMovItem.getMovimentacaoTipo().equals("compra")) {
+                if (dtoMovItem.getMovimentacaoQuantidade() != null) {
+                    produtoBanco.setProdutoQuantidadeEstoque(movItem.getProduto().getProdutoQuantidadeEstoque() + dtoMovItem.getMovimentacaoQuantidade());
+                    produtoBanco.setProdutoValorUnitario(movItem.getMovimentacaoValorUnitario());
+
+                    produtoRepository.save(produtoBanco);
+                }
+            }
+            if (dtoMovItem.getMovimentacaoTipo().equals("VENDA") || dtoMovItem.getMovimentacaoTipo().equals("Venda") ||  dtoMovItem.getMovimentacaoTipo().equals("Venda")) {
+                if (dtoMovItem.getMovimentacaoQuantidade() != null) {
+                    produtoBanco.setProdutoQuantidadeEstoque(movItem.getProduto().getProdutoQuantidadeEstoque() - dtoMovItem.getMovimentacaoQuantidade());
+                    produtoRepository.save(produtoBanco);
+                }
+            }
+        }
+
+        return  dtoMovItem.getMovimentacaoTipo() + " registrada com sucesso!";
     }
-
-//    public String venderProduto(MovimentacaoItemDTO dtoMovItem) { //TODO registra o movimento, mas não diminui o estoque
-//        MovimentacaoItem movItem = new MovimentacaoItem();
-//        movimentacaoDTOModel(movItem, dtoMovItem);
-//
-//        movItemRepository.save(movItem);
-//        produtoService.atualizarEstoque(dtoMovItem.getProdutoID(), -(dtoMovItem.getMovimentacaoQuantidade()));
-//
-//        return "Venda registrada com sucesso!";
-//    }
-
 
     //Relatórios
     public List<RelatorioDTO> relatorioProdutosMaisVendidos() {
