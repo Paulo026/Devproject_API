@@ -1,5 +1,6 @@
 package org.serratec.trabalho.api.esquadrao6.service;
 
+import org.serratec.trabalho.api.esquadrao6.dto.MovimentacaoItemDTO;
 import org.serratec.trabalho.api.esquadrao6.exception.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.time.LocalDate;
 import java.util.Properties;
 
 @Component
@@ -48,6 +50,7 @@ public class EmailService {
         enviarEmail.setDefaultEncoding("UTF-8");
         prop.put("mail.smtp.auth", true);
         prop.put("mail.smtp.ssl.enable", true);
+        prop.put("mail.imap.auth.mechanisms", "XOAUTH2");
         enviarEmail.setJavaMailProperties(prop);
 
         return enviarEmail;
@@ -93,12 +96,12 @@ public class EmailService {
         }
     }
 
-    //Envio de e-mails
-    public void emailVendaConcluida(Integer numeroPedido, String nomeProduto, Integer qtProduto, Double valorUnitário, Double valorTotal) throws MessagingException, EmailException {
+    public void emailVendaConcluida(MovimentacaoItemDTO movDTO) throws MessagingException, EmailException {
         this.emailSender = javaMailSender();
         MimeMessage message = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
-
+        LocalDate prevEntrega = movDTO.getMovimentacaoData().plusDays(14);
+        Double valorTotal = movDTO.getMovimentacaoQuantidade() * movDTO.getMovimentacaoValorUnitario();
         try {
             helper.setFrom(userName);
             helper.setTo(emailDestinatario);
@@ -106,18 +109,51 @@ public class EmailService {
 
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append(
-                    "<html>\r\n"
-                            + "<body>\r\n"
-                            + "<h2> Parabéns por sua compra na Loja do APIcultor!!!</h2>\r\n"
-                            + "<h6>Segue um resumo de sua compra " + numeroPedido + ": </h6>\r\n"
-                            + "<div>\r\n"
-                            + "<p>&nbsp&nbsp&nbsp Produto: " + nomeProduto + "</p>\r\n"
-                            + "<p>&nbsp&nbsp&nbsp Quantidade: " + qtProduto + "</p>\r\n"
-                            + "<p>&nbsp&nbsp&nbsp Valor Unitário: " + valorUnitário + "</p>\r\n"
-                            + "<p>&nbsp&nbsp&nbsp Valor Total: " + valorTotal + "</p>\r\n"
-                            + "</div>"
-                            + "</body>\r\n"
-                            + "</html>\r\n"
+                    "<html>\n" +
+                            "\n" +
+                            "<body>\n" +
+                            "    <h3 id='-olá-nomedocliente-'>\uD83D\uDC1D Olá, " + movDTO.getClienteNome() + "\uD83D\uDC1D</h3>\n" +
+                            "    <p>&nbsp;</p>\n" +
+                            "    <p>Obrigado por comprar conosco!!</p>\n" +
+                            "    <p> Previsão de entrega: <strong>"+ prevEntrega + "</strong></p>\n" +
+                            "    <h4 id='seu-pedido-está-em-rota-de-entrega'>Seu pedido está em rota de entrega</h4>\n" +
+                            "    <p>&nbsp;</p>\n" +
+                            "    <h5 id='resumo-do-pedido'>Resumo do pedido</h5>\n" +
+                            "    <ul>\n" +
+                            "        <li>Número do Pedido: <strong>"+ movDTO.getMovimentacaoNumeroDocumento() + "</strong></li>\n" +
+                            "        <li>Data da Compra: <strong>"+ movDTO.getMovimentacaoData() + "</strong></li>\n" +
+                            "\n" +
+                            "    </ul>\n" +
+                            "    <h5 id='itens-do-pedido'>Itens do pedido</h5>\n" +
+                            "    <figure>\n" +
+                            "        <table>\n" +
+                            "            <thead>\n" +
+                            "                <tr>\n" +
+                            "                    <th>Produto</th>\n" +
+                            "                    <th>Quantidade</th>\n" +
+                            "                    <th>Valor Unitário</th>\n" +
+                            "                    <th>Valor Total</th>\n" +
+                            "                </tr>\n" +
+                            "            </thead>\n" +
+                            "            <tbody>\n" +
+                            "                <tr>\n" +
+                            "                    <td>"+ movDTO.getProdutoNome() + "</td>\n" +
+                            "                    <td>" + movDTO.getMovimentacaoQuantidade() + "</td>\n" +
+                            "                    <td>"+ movDTO.getMovimentacaoValorUnitario() + "</td>\n" +
+                            "                    <td>"+ valorTotal +"</td>\n" +
+                            "                </tr>\n" +
+                            "            </tbody>\n" +
+                            "        </table>\n" +
+                            "    </figure>\n" +
+                            "    <p>&nbsp;</p>\n" +
+                            "    <h6 id='dúvidas'>Dúvidas?</h6>\n" +
+                            "    <p>Não entre em contato conosco!!!</p>\n" +
+                            "    <p>&nbsp;</p>\n" +
+                            "    <p>©️ Squad Team 6</p>\n" +
+                            "    <p>&nbsp;</p>\n" +
+                            "</body>\n" +
+                            "\n" +
+                            "</html>"
             );
 
             helper.setText(stringBuilder.toString(), true);

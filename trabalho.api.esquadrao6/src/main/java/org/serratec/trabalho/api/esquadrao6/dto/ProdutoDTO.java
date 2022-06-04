@@ -1,8 +1,9 @@
 package org.serratec.trabalho.api.esquadrao6.dto;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class ProdutoDTO {
+public class ProdutoDTO implements Serializable {
     //Atributos específicos da classe
     private Integer produtoId;
     private String produtoNome;
