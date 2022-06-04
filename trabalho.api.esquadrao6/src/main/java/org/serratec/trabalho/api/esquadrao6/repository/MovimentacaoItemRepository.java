@@ -20,7 +20,7 @@ public interface MovimentacaoItemRepository extends JpaRepository<MovimentacaoIt
                     "movimentacao_item mi \n" +
                     "JOIN produto p ON mi.produto_id = p.produto_id\n" +
                     "WHERE\n" +
-                    "mi.mov_tipo = 'VENDA'\n" +
+                    "mi.mov_tipo = UPPER('VENDA')\n" +
                     "GROUP BY p.produto_nome \n" +
                     "ORDER BY SUM(mi.mov_item_qt) DESC \n" +
                     "LIMIT 5\n",
