@@ -2,6 +2,7 @@ package org.serratec.trabalho.api.esquadrao6.service;
 
 import org.serratec.trabalho.api.esquadrao6.dto.MovimentacaoItemDTO;
 import org.serratec.trabalho.api.esquadrao6.dto.RelatorioDTO;
+import org.serratec.trabalho.api.esquadrao6.exception.EmailException;
 import org.serratec.trabalho.api.esquadrao6.model.MovimentacaoItem;
 import org.serratec.trabalho.api.esquadrao6.model.Produto;
 import org.serratec.trabalho.api.esquadrao6.repository.ClienteRepository;
@@ -10,6 +11,7 @@ import org.serratec.trabalho.api.esquadrao6.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -32,9 +34,6 @@ public class MovimentacaoItemService {
     @Autowired
     EmailService email;
 
- 
-
-
 
     //CRUD
     public MovimentacaoItemDTO buscarMovimentacaoPorID(Integer movID) {
@@ -49,7 +48,7 @@ public class MovimentacaoItemService {
         return dtoMovItem;
     }
 
-    public List<MovimentacaoItemDTO> buscarTodasMovimentacoes(Integer movID) {
+    public List<MovimentacaoItemDTO> buscarTodasMovimentacoes() {
         List<MovimentacaoItem> listaMov = movItemRepository.findAll();
         List<MovimentacaoItemDTO> dtoListaMov = new ArrayList<>();
 
@@ -62,7 +61,7 @@ public class MovimentacaoItemService {
     }
 
     //Movimentos da Loja
-    public String movimentarProduto(MovimentacaoItemDTO dtoMovItem) {
+    public String movimentarProduto(MovimentacaoItemDTO dtoMovItem) throws MessagingException, EmailException {
         MovimentacaoItem movItem = new MovimentacaoItem();
         movimentacaoDTOModel(movItem, dtoMovItem);
 
@@ -76,19 +75,19 @@ public class MovimentacaoItemService {
                 if (dtoMovItem.getMovimentacaoQuantidade() != null) {
                     produtoBanco.setProdutoQuantidadeEstoque(movItem.getProduto().getProdutoQuantidadeEstoque() + dtoMovItem.getMovimentacaoQuantidade());
                     produtoBanco.setProdutoValorUnitario(movItem.getMovimentacaoValorUnitario());
-
                     produtoRepository.save(produtoBanco);
                 }
             }
-            if (dtoMovItem.getMovimentacaoTipo().equals("VENDA") || dtoMovItem.getMovimentacaoTipo().equals("Venda") ||  dtoMovItem.getMovimentacaoTipo().equals("Venda")) {
+            if (dtoMovItem.getMovimentacaoTipo().equals("VENDA") || dtoMovItem.getMovimentacaoTipo().equals("Venda") || dtoMovItem.getMovimentacaoTipo().equals("Venda")) {
                 if (dtoMovItem.getMovimentacaoQuantidade() != null) {
                     produtoBanco.setProdutoQuantidadeEstoque(movItem.getProduto().getProdutoQuantidadeEstoque() - dtoMovItem.getMovimentacaoQuantidade());
+                    movimentacaoModelDTO(movItem,dtoMovItem);
+                    email.emailVendaConcluida(dtoMovItem);
                     produtoRepository.save(produtoBanco);
                 }
             }
         }
-
-        return  dtoMovItem.getMovimentacaoTipo() + " registrada com sucesso!";
+        return movItem.getMovimentacaoTipo() + " cadastrada com sucesso";
     }
 
     //Relatórios
@@ -105,13 +104,16 @@ public class MovimentacaoItemService {
         dtoMovItem.setMovimentacaoValorUnitario(movItem.getMovimentacaoValorUnitario());
         dtoMovItem.setMovimentacaoNumeroDocumento(movItem.getMovimentacaoNumeroDocumento());
 
+
         dtoMovItem.setClienteID(movItem.getCliente().getClienteId());
+        dtoMovItem.setClienteNome(movItem.getCliente().getClienteNome());
         dtoMovItem.setProdutoID(movItem.getProduto().getProdutoId());
+        dtoMovItem.setProdutoNome(movItem.getProduto().getProdutoNome());
 
         return dtoMovItem;
     }
 
-    public MovimentacaoItem movimentacaoDTOModel(MovimentacaoItem movItem, MovimentacaoItemDTO dtoMovItem) {
+    public MovimentacaoItem     movimentacaoDTOModel(MovimentacaoItem movItem, MovimentacaoItemDTO dtoMovItem) {
         movItem.setMovimentacaoID(dtoMovItem.getMovimentacaoID());
         movItem.setMovimentacaoData(dtoMovItem.getMovimentacaoData());
         movItem.setMovimentacaoTipo(dtoMovItem.getMovimentacaoTipo());
@@ -119,13 +121,8 @@ public class MovimentacaoItemService {
         movItem.setMovimentacaoValorUnitario(dtoMovItem.getMovimentacaoValorUnitario());
         movItem.setMovimentacaoNumeroDocumento(dtoMovItem.getMovimentacaoNumeroDocumento());
 
-
         movItem.setCliente(clienteRepository.findById(dtoMovItem.getClienteID()).get());
         movItem.setProduto(produtoRepository.findById(dtoMovItem.getProdutoID()).get());
-
-        movItem.setCliente(clienteRepository.findById(dtoMovItem.getClienteID()).get());
-        movItem.setProduto(produtoRepository.findById(dtoMovItem.getProdutoID()).get());
-
 
         return movItem;
     }

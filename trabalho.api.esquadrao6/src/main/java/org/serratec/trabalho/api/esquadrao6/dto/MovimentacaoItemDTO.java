@@ -1,8 +1,9 @@
 package org.serratec.trabalho.api.esquadrao6.dto;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class MovimentacaoItemDTO {
+public class MovimentacaoItemDTO implements Serializable {
     //Atributos específicos da classe
     private Integer movimentacaoID;
     private LocalDate movimentacaoData;
@@ -13,7 +14,9 @@ public class MovimentacaoItemDTO {
 
     //Atributos que se relacionam com outras classes
     private Integer clienteID;
+    private String clienteNome;
     private Integer produtoID;
+    private String produtoNome;
 
     //Construtor Vazio
     public MovimentacaoItemDTO() {
@@ -77,11 +80,27 @@ public class MovimentacaoItemDTO {
         this.clienteID = clienteID;
     }
 
+    public String getClienteNome() {
+        return clienteNome;
+    }
+
+    public void setClienteNome(String clienteNome) {
+        this.clienteNome = clienteNome;
+    }
+
     public Integer getProdutoID() {
         return produtoID;
     }
 
     public void setProdutoID(Integer produtoID) {
         this.produtoID = produtoID;
+    }
+
+    public String getProdutoNome() {
+        return produtoNome;
+    }
+
+    public void setProdutoNome(String produtoNome) {
+        this.produtoNome = produtoNome;
     }
 }

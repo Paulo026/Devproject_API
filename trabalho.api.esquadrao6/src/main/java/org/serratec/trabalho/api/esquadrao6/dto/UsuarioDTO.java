@@ -1,6 +1,8 @@
 package org.serratec.trabalho.api.esquadrao6.dto;
 
-public class UsuarioDTO {
+import java.io.Serializable;
+
+public class UsuarioDTO implements Serializable {
 
 	private Integer idUsuario;
 	private String Username;

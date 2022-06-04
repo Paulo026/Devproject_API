@@ -1,6 +1,8 @@
 package org.serratec.trabalho.api.esquadrao6.dto;
 
-public class FuncionarioDTO {
+import java.io.Serializable;
+
+public class FuncionarioDTO implements Serializable {
 
     //Atributos específicos da classe
     private Integer FuncionarioId;

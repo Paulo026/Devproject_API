@@ -3,16 +3,19 @@ package org.serratec.trabalho.api.esquadrao6.controller;
 
 import org.serratec.trabalho.api.esquadrao6.dto.MovimentacaoItemDTO;
 import org.serratec.trabalho.api.esquadrao6.dto.RelatorioDTO;
+import org.serratec.trabalho.api.esquadrao6.exception.EmailException;
 import org.serratec.trabalho.api.esquadrao6.service.MovimentacaoItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import java.util.List;
 
 @RestController
 @RequestMapping("/movimentacaoItem")
 public class MovimentacaoItemController {
+
     @Autowired
     MovimentacaoItemService movimentacaoItemService;
 
@@ -20,15 +23,11 @@ public class MovimentacaoItemController {
 
     //Movimentações da loja
     @PostMapping("/movimentar")
-    public ResponseEntity<String> comprarProduto (@RequestBody MovimentacaoItemDTO dtoMovItem) {
+    public ResponseEntity<String> movimentarProduto (@RequestBody MovimentacaoItemDTO dtoMovItem) throws MessagingException, EmailException {
 
         return ResponseEntity.ok(movimentacaoItemService.movimentarProduto(dtoMovItem));
     }
 
-//    @PostMapping("/vender")
-//    public ResponseEntity<String> venderProduto (@RequestBody MovimentacaoItemDTO dtoMovItem) {
-//        return ResponseEntity.ok(movimentacaoItemService.venderProduto(dtoMovItem));
-//    }
 
     //Relatórios
     @GetMapping("/relatorio/maisVendidos")
