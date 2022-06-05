@@ -20,7 +20,7 @@ public class Funcionario {
     private String funcionarioNome;
 
     @NotNull
-    @Column(name = "funcionario_cpf") //TODO colocar CPF como únicos
+    @Column(name = "funcionario_cpf", unique = true)
     @Size(min = 11, max = 11)
     private String funcionarioCpf;
 
