@@ -71,14 +71,14 @@ public class MovimentacaoItemService {
         Produto produtoBanco = new Produto();
         if (produto.isPresent()) {
             produtoBanco = produto.get();
-            if (dtoMovItem.getMovimentacaoTipo().equals("COMPRA") || dtoMovItem.getMovimentacaoTipo().equals("Compra") || dtoMovItem.getMovimentacaoTipo().equals("compra")) {
+            if (dtoMovItem.getMovimentacaoTipo().equalsIgnoreCase("COMPRA")) {
                 if (dtoMovItem.getMovimentacaoQuantidade() != null) {
                     produtoBanco.setProdutoQuantidadeEstoque(movItem.getProduto().getProdutoQuantidadeEstoque() + dtoMovItem.getMovimentacaoQuantidade());
                     produtoBanco.setProdutoValorUnitario(movItem.getMovimentacaoValorUnitario());
                     produtoRepository.save(produtoBanco);
                 }
             }
-            if (dtoMovItem.getMovimentacaoTipo().equals("VENDA") || dtoMovItem.getMovimentacaoTipo().equals("Venda") || dtoMovItem.getMovimentacaoTipo().equals("Venda")) {
+            if (dtoMovItem.getMovimentacaoTipo().equalsIgnoreCase("VENDA")) {
                 if (dtoMovItem.getMovimentacaoQuantidade() != null) {
                     produtoBanco.setProdutoQuantidadeEstoque(movItem.getProduto().getProdutoQuantidadeEstoque() - dtoMovItem.getMovimentacaoQuantidade());
                     movimentacaoModelDTO(movItem,dtoMovItem);
@@ -113,7 +113,7 @@ public class MovimentacaoItemService {
         return dtoMovItem;
     }
 
-    public MovimentacaoItem     movimentacaoDTOModel(MovimentacaoItem movItem, MovimentacaoItemDTO dtoMovItem) {
+    public MovimentacaoItem movimentacaoDTOModel(MovimentacaoItem movItem, MovimentacaoItemDTO dtoMovItem) {
         movItem.setMovimentacaoID(dtoMovItem.getMovimentacaoID());
         movItem.setMovimentacaoData(dtoMovItem.getMovimentacaoData());
         movItem.setMovimentacaoTipo(dtoMovItem.getMovimentacaoTipo());
