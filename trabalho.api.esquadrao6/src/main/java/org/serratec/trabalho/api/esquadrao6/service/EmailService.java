@@ -164,5 +164,39 @@ public class EmailService {
         }
     }
 
+    public void emailFaltaEstoque(MovimentacaoItemDTO movDTO) throws MessagingException, EmailException {
+        this.emailSender = javaMailSender();
+        MimeMessage message = emailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        LocalDate prevEntrega = movDTO.getMovimentacaoData().plusDays(14);
+        Double valorTotal = movDTO.getMovimentacaoQuantidade() * movDTO.getMovimentacaoValorUnitario();
+        try {
+            helper.setFrom(userName);
+            helper.setTo(emailDestinatario);
+            helper.setSubject("Notificação de falta de Estoque!!!");
+
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(
+                    "<html>\n" +
+                            "<head>\n" +
+                            "<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>\n" +
+                            "<title></title>\n" +
+                            "</head>\n" +
+                            "<body><h1 id='-notificação-de-falta-de-estoque-'>\uD83D\uDC1D Notificação de falta de estoque \uD83D\uDC1D</h1>\n" +
+                            "<h2 id='atenção'>Atenção!!!</h2>\n" +
+                            "<p>O produto <strong> " + movDTO.getProdutoNome() + "</strong> está com estoque menor ou igual a 5!!!</p>\n" +
+                            "<p>&nbsp;</p>\n" +
+                            "</body>\n" +
+                            "</html>"
+            );
+
+            helper.setText(stringBuilder.toString(), true);
+            emailSender.send(message);
+
+        } catch (Exception exception) {
+            throw new EmailException("Houve erro ao enviar o email: " + exception.getMessage());
+        }
+    }
+
 
 }
