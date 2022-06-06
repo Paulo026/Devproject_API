@@ -81,9 +81,15 @@ public class ProdutoService {
 		return produto;
 	}
 	
-	public String salvar(ProdutoDTO produtoDTO) throws ProdutoException { //TODO Se o produto já estiver cadastrado o sistema irá atualizar somente a quantidade de produto em estoque
-		Produto produto = new Produto();
+	public String salvar(ProdutoDTO produtoDTO) throws ProdutoException { 
+		Produto noBanco = produtoRepository.recuperarNome(produtoDTO.getProdutoNome());
+		if(noBanco != null) {
+			noBanco.setProdutoQuantidadeEstoque(noBanco.getProdutoQuantidadeEstoque() + produtoDTO.getProdutoQuantidadeEstoque());
+			produtoRepository.save(noBanco);
+			return "Produto já estava cadastrado (id: " + noBanco.getProdutoId() + "). O estoque foi atualizado com sucesso!";
+		}
 
+		Produto produto = new Produto();
 		transformarDTOEmModel(produto, produtoDTO);
 		produtoRepository.save(produto);
 		return "O produto foi criado com uma ID: " + produto.getProdutoId();
