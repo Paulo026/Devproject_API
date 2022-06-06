@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<Usuario,Integer> {
+public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
-	@Query(value="FROM Usuario u WHERE u.Username = ?1")
+	@Query(value = "FROM Usuario u WHERE u.Username = ?1")
 	Optional<Usuario> buscarPorLogin(String login);
 }

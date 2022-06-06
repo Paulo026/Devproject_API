@@ -21,42 +21,42 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/funcionario")
 public class FuncionarioController {
 
-    @Autowired
-    FuncionarioService funcionarioService;
+	@Autowired
+	FuncionarioService funcionarioService;
 
-    //verificar erro
-    @PostMapping("/salvar")
-    public ResponseEntity<String> salvar(@RequestBody FuncionarioDTO funcionarioDTO) throws FuncionarioException {
-        return ResponseEntity.ok(funcionarioService.salvar(funcionarioDTO));
-    }
 
-    @GetMapping("/buscar/{funcionarioId}")
-    public ResponseEntity<FuncionarioDTO> buscarPorId(@PathVariable Integer funcionarioId) throws FuncionarioException{
-        return ResponseEntity.ok(funcionarioService.buscarPorId(funcionarioId));
-    }
+	@PostMapping("/salvar")
+	public ResponseEntity<String> salvar(@RequestBody FuncionarioDTO funcionarioDTO) throws FuncionarioException {
+		return ResponseEntity.ok(funcionarioService.salvar(funcionarioDTO));
+	}
 
-    @DeleteMapping("/{funcionarioId}")
-    public ResponseEntity<Void> deletar(@PathVariable Integer funcionarioId){
-        funcionarioService.deletar(funcionarioId);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
-    }
+	@GetMapping("/buscar/{funcionarioId}")
+	public ResponseEntity<FuncionarioDTO> buscarPorId(@PathVariable Integer funcionarioId) throws FuncionarioException {
+		return ResponseEntity.ok(funcionarioService.buscarPorId(funcionarioId));
+	}
 
-    @PutMapping("atualizar/{funcionarioId}")
-    public ResponseEntity<String> atualizar(@PathVariable Integer funcionarioId, @RequestBody FuncionarioDTO funcionarioDTO)
-    throws FuncionarioException{
-        return ResponseEntity.ok(funcionarioService.atualizar(funcionarioId, funcionarioDTO));
-    }
+	@DeleteMapping("/{funcionarioId}")
+	public ResponseEntity<Void> deletar(@PathVariable Integer funcionarioId) {
+		funcionarioService.deletar(funcionarioId);
+		return new ResponseEntity<>(HttpStatus.ACCEPTED);
+	}
 
-    @GetMapping("/lista")
-    public ResponseEntity<List<FuncionarioDTO>> listarTodos(){
-        return ResponseEntity.ok(funcionarioService.buscarTodos());
-    }
+	@PutMapping("atualizar/{funcionarioId}")
+	public ResponseEntity<String> atualizar(@PathVariable Integer funcionarioId,
+			@RequestBody FuncionarioDTO funcionarioDTO) throws FuncionarioException {
+		return ResponseEntity.ok(funcionarioService.atualizar(funcionarioId, funcionarioDTO));
+	}
 
-    @PostMapping("/salvar-lista")
-    public ResponseEntity<Void> salvarLista(@RequestBody List<FuncionarioDTO> listafuncionarioDTO) throws FuncionarioException {
-        funcionarioService.salvarListaFuncionario(listafuncionarioDTO);
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
+	@GetMapping("/lista")
+	public ResponseEntity<List<FuncionarioDTO>> listarTodos() {
+		return ResponseEntity.ok(funcionarioService.buscarTodos());
+	}
 
+	@PostMapping("/salvar-lista")
+	public ResponseEntity<Void> salvarLista(@RequestBody List<FuncionarioDTO> listafuncionarioDTO)
+			throws FuncionarioException {
+		funcionarioService.salvarListaFuncionario(listafuncionarioDTO);
+		return new ResponseEntity<>(HttpStatus.CREATED);
+	}
 
 }

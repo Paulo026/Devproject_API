@@ -88,11 +88,12 @@ public class FuncionarioService {
 		return funcionarioDTO;
 	}
 
-	public Funcionario transformarDTOEmModel(Funcionario funcionario, FuncionarioDTO funcionarioDTO) throws FuncionarioException{
-		if(funcionarioDTO.getFuncionarioNome() == null){
+	public Funcionario transformarDTOEmModel(Funcionario funcionario, FuncionarioDTO funcionarioDTO)
+			throws FuncionarioException {
+		if (funcionarioDTO.getFuncionarioNome() == null) {
 			throw new FuncionarioException("O nome do funcionário não foi informado");
 		}
-		if(funcionarioDTO.getFuncionarioCpf() == null){
+		if (funcionarioDTO.getFuncionarioCpf() == null) {
 			throw new FuncionarioException("O cpf do funcionário não foi informado");
 		}
 

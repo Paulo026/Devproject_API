@@ -4,28 +4,25 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class ClienteDTO implements Serializable {
-    
+
 	private static final long serialVersionUID = 1L;
-	//Atributos específicos da classe
-    private Integer clienteId;
-    private String clienteNome;
-    private String clienteUsuario;
-    private String clienteSenha;
-    private String clienteEmail;
-    private String clienteCpf;
-    private LocalDate clienteDataNascimento;
-    private String clienteTelefone;
-    private String clienteEnderecoCompleto;
-    private String clienteCep;
+	// Atributos específicos da classe
+	private Integer clienteId;
+	private String clienteNome;
+	private String clienteUsuario;
+	private String clienteSenha;
+	private String clienteEmail;
+	private String clienteCpf;
+	private LocalDate clienteDataNascimento;
+	private String clienteTelefone;
+	private String clienteEnderecoCompleto;
+	private String clienteCep;
 
-
-
-    //Construtor Vazio
+	// Construtor Vazio
 	public ClienteDTO() {
 	}
 
-
-	//Getters e Setters
+	// Getters e Setters
 	public Integer getClienteId() {
 		return clienteId;
 	}

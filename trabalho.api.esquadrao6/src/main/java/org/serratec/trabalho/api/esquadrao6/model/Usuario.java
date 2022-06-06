@@ -10,24 +10,24 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name= "usuario")
-public class Usuario implements Serializable{
+@Table(name = "usuario")
+public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="usuario_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "usuario_id")
 	private Integer idUsuario;
-	
-	@Column(name="usuario_login")
+
+	@Column(name = "usuario_login")
 	private String Username;
-	
-	@Column(name="usuario_senha")
+
+	@Column(name = "usuario_senha")
 	private String password;
-	
+
 	public Usuario() {
-		
+
 	}
 
 	public Integer getIdUsuario() {

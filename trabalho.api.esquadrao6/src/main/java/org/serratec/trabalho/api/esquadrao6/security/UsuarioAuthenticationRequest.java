@@ -8,9 +8,9 @@ public class UsuarioAuthenticationRequest implements Serializable {
 
 	private String username;
 	private String password;
-	
+
 	public UsuarioAuthenticationRequest() {
-		
+
 	}
 
 	public UsuarioAuthenticationRequest(String username, String password) {
@@ -34,5 +34,5 @@ public class UsuarioAuthenticationRequest implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-		
+
 }

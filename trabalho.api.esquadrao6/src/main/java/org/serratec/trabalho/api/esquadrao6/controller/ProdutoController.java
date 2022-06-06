@@ -20,38 +20,39 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/produto")
 public class ProdutoController {
-	
+
 	@Autowired
 	ProdutoService produtoService;
-	
+
 	@PostMapping("/salvar")
 	public ResponseEntity<String> salvar(@RequestBody ProdutoDTO produtoDTO) throws ProdutoException {
 		return ResponseEntity.ok(produtoService.salvar(produtoDTO));
 	}
-	
+
 	@GetMapping("/buscar/{idProduto}")
-	public ResponseEntity<ProdutoDTO> buscarPorId(@PathVariable Integer idProduto) throws ProdutoException{
+	public ResponseEntity<ProdutoDTO> buscarPorId(@PathVariable Integer idProduto) throws ProdutoException {
 		return ResponseEntity.ok(produtoService.buscarPorId(idProduto));
 	}
-	
+
 	@DeleteMapping("/{idProduto}")
-	public ResponseEntity<Void> deletar(@PathVariable Integer idProduto){
+	public ResponseEntity<Void> deletar(@PathVariable Integer idProduto) {
 		produtoService.deletar(idProduto);
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
-	
+
 	@PutMapping("/atualizar/{idProduto}")
-	public ResponseEntity<String> atualizar(@PathVariable Integer idProduto, @RequestBody ProdutoDTO produtoDTO ) throws ProdutoException{
+	public ResponseEntity<String> atualizar(@PathVariable Integer idProduto, @RequestBody ProdutoDTO produtoDTO)
+			throws ProdutoException {
 		return ResponseEntity.ok(produtoService.atualizar(idProduto, produtoDTO));
 	}
-	
+
 	@GetMapping("/lista")
-	public ResponseEntity<List<ProdutoDTO>> listaTodos(){
+	public ResponseEntity<List<ProdutoDTO>> listaTodos() {
 		return ResponseEntity.ok(produtoService.buscarTodos());
 	}
-	
+
 	@PostMapping("/salvar-lista")
-	public ResponseEntity<Void> salvarLista(@RequestBody List<ProdutoDTO> listaProdutoDTO){
+	public ResponseEntity<Void> salvarLista(@RequestBody List<ProdutoDTO> listaProdutoDTO) {
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 }
