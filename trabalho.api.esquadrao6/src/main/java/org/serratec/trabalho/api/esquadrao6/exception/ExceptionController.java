@@ -1,7 +1,5 @@
 package org.serratec.trabalho.api.esquadrao6.exception;
 
-import org.serratec.trabalho.api.esquadrao6.model.MovimentacaoItem;
-import org.serratec.trabalho.api.esquadrao6.model.ProdutoCategoria;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

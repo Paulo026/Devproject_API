@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class MovimentacaoItemDTO implements Serializable {
-    //Atributos específicos da classe
+    
+	private static final long serialVersionUID = 1L;
+	//Atributos específicos da classe
     private Integer movimentacaoID;
     private LocalDate movimentacaoData;
     private Integer movimentacaoNumeroDocumento;

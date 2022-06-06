@@ -4,7 +4,9 @@ import java.io.Serializable;
 
 public class FuncionarioDTO implements Serializable {
 
-    //Atributos específicos da classe
+   
+	private static final long serialVersionUID = 1L;
+	//Atributos específicos da classe
     private Integer FuncionarioId;
     private String funcionarioNome;
     private String funcionarioCpf;
