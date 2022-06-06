@@ -3,6 +3,7 @@ package org.serratec.trabalho.api.esquadrao6.service;
 import org.serratec.trabalho.api.esquadrao6.dto.MovimentacaoItemDTO;
 import org.serratec.trabalho.api.esquadrao6.dto.RelatorioDTO;
 import org.serratec.trabalho.api.esquadrao6.exception.EmailException;
+import org.serratec.trabalho.api.esquadrao6.exception.MovimentacaoItemException;
 import org.serratec.trabalho.api.esquadrao6.model.MovimentacaoItem;
 import org.serratec.trabalho.api.esquadrao6.model.Produto;
 import org.serratec.trabalho.api.esquadrao6.repository.ClienteRepository;
@@ -61,7 +62,7 @@ public class MovimentacaoItemService {
     }
 
     //Movimentos da Loja
-    public String movimentarProduto(MovimentacaoItemDTO dtoMovItem) throws MessagingException, EmailException {
+    public String movimentarProduto(MovimentacaoItemDTO dtoMovItem) throws MessagingException, EmailException, MovimentacaoItemException {
         MovimentacaoItem movItem = new MovimentacaoItem();
         movimentacaoDTOModel(movItem, dtoMovItem);
 
@@ -79,11 +80,18 @@ public class MovimentacaoItemService {
                 }
             }
             if (dtoMovItem.getMovimentacaoTipo().equalsIgnoreCase("VENDA")) {
-                if (dtoMovItem.getMovimentacaoQuantidade() != null) {
-                    produtoBanco.setProdutoQuantidadeEstoque(movItem.getProduto().getProdutoQuantidadeEstoque() - dtoMovItem.getMovimentacaoQuantidade());
-                    movimentacaoModelDTO(movItem,dtoMovItem);
-                    email.emailVendaConcluida(dtoMovItem);
-                    produtoRepository.save(produtoBanco);
+                if (dtoMovItem.getMovimentacaoQuantidade() > produtoBanco.getProdutoQuantidadeEstoque()) {
+                    throw new MovimentacaoItemException("Quantidade vendida é maior que a quantidade em estoque");
+                } else {
+                    if (dtoMovItem.getMovimentacaoQuantidade() != null) {
+                        produtoBanco.setProdutoQuantidadeEstoque(movItem.getProduto().getProdutoQuantidadeEstoque() - dtoMovItem.getMovimentacaoQuantidade());
+                        movimentacaoModelDTO(movItem, dtoMovItem);
+                        email.emailVendaConcluida(dtoMovItem);
+                        if (produtoBanco.getProdutoQuantidadeEstoque() <= 5) {
+                            email.emailFaltaEstoque(dtoMovItem);
+                        }
+                        produtoRepository.save(produtoBanco);
+                    }
                 }
             }
         }

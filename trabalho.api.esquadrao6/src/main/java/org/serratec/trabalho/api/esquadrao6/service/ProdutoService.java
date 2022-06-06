@@ -1,6 +1,5 @@
 package org.serratec.trabalho.api.esquadrao6.service;
 
-import org.serratec.trabalho.api.esquadrao6.dto.MovimentacaoItemDTO;
 import org.serratec.trabalho.api.esquadrao6.dto.ProdutoDTO;
 import org.serratec.trabalho.api.esquadrao6.exception.ProdutoException;
 import org.serratec.trabalho.api.esquadrao6.model.Produto;
@@ -82,8 +81,9 @@ public class ProdutoService {
 		return produto;
 	}
 	
-	public String salvar(ProdutoDTO produtoDTO) throws ProdutoException {
+	public String salvar(ProdutoDTO produtoDTO) throws ProdutoException { //TODO Se o produto já estiver cadastrado o sistema irá atualizar somente a quantidade de produto em estoque
 		Produto produto = new Produto();
+
 		transformarDTOEmModel(produto, produtoDTO);
 		produtoRepository.save(produto);
 		return "O produto foi criado com uma ID: " + produto.getProdutoId();
@@ -134,19 +134,6 @@ public class ProdutoService {
 		throw new ProdutoException("O produto não foi atualizado.");
 	}
 
-	public void atualizarEstoque(Integer idProduto, MovimentacaoItemDTO movimentacaoItemDTO) {
-		ProdutoDTO produtoDTO = new ProdutoDTO();
-		Optional<Produto> produto = produtoRepository.findById(idProduto);
-		Produto produtoBanco = new Produto();
-		if (produto.isPresent()) {
-			produtoBanco = produto.get();
-			if (produtoDTO.getProdutoQuantidadeEstoque() != null) {
-				produtoBanco.setProdutoQuantidadeEstoque(produtoDTO.getProdutoQuantidadeEstoque() + movimentacaoItemDTO.getMovimentacaoQuantidade());
-			}
-			produtoRepository.save(produtoBanco);
-		}
-	}
-	
 	public List<ProdutoDTO> buscarTodos(){
 		List<Produto> produtoListaModel = produtoRepository.findAll();
 		List<ProdutoDTO> produtoListaDTO = new ArrayList<>();
