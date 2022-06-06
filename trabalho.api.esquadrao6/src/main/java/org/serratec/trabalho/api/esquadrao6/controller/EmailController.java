@@ -13,11 +13,11 @@ import javax.mail.MessagingException;
 @RequestMapping("/email")
 public class EmailController {
 
-    @Autowired
-    EmailService emailService;
+	@Autowired
+	EmailService emailService;
 
-    @GetMapping("/email")
-    public void enviarEmailTeste() throws MessagingException, EmailException {
-        emailService.emailTeste();
-    }
+	@GetMapping("/email")
+	public void enviarEmailTeste() throws MessagingException, EmailException {
+		emailService.emailTeste();
+	}
 }

@@ -16,9 +16,8 @@ public class ClienteService {
 
 	@Autowired
 	ClienteRepository clienteRepository;
-	
-	
-	//código = id
+
+	// código = id
 	// verificar se há erro
 	public String salvar(ClienteDTO clienteDTO) throws ClienteException {
 		Cliente cliente = new Cliente();
@@ -26,70 +25,70 @@ public class ClienteService {
 		clienteRepository.save(cliente);
 		return "O cliente foi cadastrado com sucesso, seu código é: " + cliente.getClienteId();
 	}
-	
-	public ClienteDTO buscarporId(Integer clienteId) throws ClienteException{
+
+	public ClienteDTO buscarporId(Integer clienteId) throws ClienteException {
 		Optional<Cliente> cliente = clienteRepository.findById(clienteId);
 		Cliente clienteNaLoja = new Cliente();
 		ClienteDTO clienteDTO = new ClienteDTO();
-		if(cliente.isPresent()) {
+		if (cliente.isPresent()) {
 			clienteNaLoja = cliente.get();
 			transformarModelEmDTO(clienteNaLoja, clienteDTO);
 			return clienteDTO;
 		}
 		throw new ClienteException("O cliente com o código informado não foi encontrado");
 	}
-	
+
 	public void deletar(Integer idCliente) {
 		clienteRepository.deleteById(idCliente);
 	}
-	
-	public String atualizar(Integer clienteId, ClienteDTO clienteDTO) throws ClienteException{
+
+	public String atualizar(Integer clienteId, ClienteDTO clienteDTO) throws ClienteException {
 		Optional<Cliente> cliente = clienteRepository.findById(clienteId);
 		Cliente clienteLoja = new Cliente();
-		if(cliente.isPresent()) {
+		if (cliente.isPresent()) {
 			clienteLoja = cliente.get();
-			if(clienteDTO.getClienteNome() != null) {
+			if (clienteDTO.getClienteNome() != null) {
 				clienteLoja.setClienteNome(clienteDTO.getClienteNome());
 			}
-			
-			if(clienteDTO.getClienteUsuario() != null) {
+
+			if (clienteDTO.getClienteUsuario() != null) {
 				clienteLoja.setClienteUsuario(clienteDTO.getClienteUsuario());
 			}
-			
-			if(clienteDTO.getClienteSenha() != null) {
+
+			if (clienteDTO.getClienteSenha() != null) {
 				clienteLoja.setClienteSenha(clienteDTO.getClienteSenha());
 			}
-			
-			if(clienteDTO.getClienteEmail() != null) {
+
+			if (clienteDTO.getClienteEmail() != null) {
 				clienteLoja.setClienteEmail(clienteDTO.getClienteEmail());
 			}
-			
-			if(clienteDTO.getClienteCpf() != null) {
+
+			if (clienteDTO.getClienteCpf() != null) {
 				clienteLoja.setClienteCpf(clienteDTO.getClienteCpf());
 			}
-			
-			if(clienteDTO.getClienteDataNascimento() != null) {
+
+			if (clienteDTO.getClienteDataNascimento() != null) {
 				clienteLoja.setClienteDataNascimento(clienteDTO.getClienteDataNascimento());
 			}
-			
-			if(clienteDTO.getClienteTelefone() != null) {
+
+			if (clienteDTO.getClienteTelefone() != null) {
 				clienteLoja.setClienteTelefone(clienteDTO.getClienteTelefone());
 			}
-			
-			if(clienteDTO.getClienteEnderecoCompleto() != null) {
+
+			if (clienteDTO.getClienteEnderecoCompleto() != null) {
 				clienteLoja.setClienteEnderecoCompleto(clienteDTO.getClienteEnderecoCompleto());
 			}
-			
-			if(clienteDTO.getClienteCep() != null) {
+
+			if (clienteDTO.getClienteCep() != null) {
 				clienteLoja.setClienteCep(clienteDTO.getClienteCep());
 			}
 			clienteRepository.save(clienteLoja);
-			return "O cliente com código: "+ clienteLoja.getClienteId()+ "foi atualizado";
+			return "O cliente com código: " + clienteLoja.getClienteId() + "foi atualizado";
 		}
-			throw new ClienteException("O cliente não fora atualizado!");
+		throw new ClienteException("O cliente não fora atualizado!");
 	}
 
-	//Conversores
+	// Conversores
 	public ClienteDTO transformarModelEmDTO(Cliente cliente, ClienteDTO clienteDTO) {
 		clienteDTO.setClienteId(cliente.getClienteId());
 		clienteDTO.setClienteNome(cliente.getClienteNome());
@@ -101,28 +100,27 @@ public class ClienteService {
 		clienteDTO.setClienteTelefone(cliente.getClienteTelefone());
 		clienteDTO.setClienteEnderecoCompleto(cliente.getClienteEnderecoCompleto());
 		clienteDTO.setClienteCep(cliente.getClienteCep());
-		
 
 		return clienteDTO;
 	}
 
-	public Cliente transformarDTOEmModel(ClienteDTO clienteDTO, Cliente cliente) throws ClienteException{
-		if(clienteDTO.getClienteNome() == null){
+	public Cliente transformarDTOEmModel(ClienteDTO clienteDTO, Cliente cliente) throws ClienteException {
+		if (clienteDTO.getClienteNome() == null) {
 			throw new ClienteException("O nome do cliente não foi informado");
 		}
-		if(clienteDTO.getClienteCpf() == null){
+		if (clienteDTO.getClienteCpf() == null) {
 			throw new ClienteException("O cpf do cliente não foi informado");
 		}
-		if(clienteDTO.getClienteUsuario() == null){
+		if (clienteDTO.getClienteUsuario() == null) {
 			throw new ClienteException("O usuário do cliente não foi informado");
 		}
-		if(clienteDTO.getClienteSenha() == null){
+		if (clienteDTO.getClienteSenha() == null) {
 			throw new ClienteException("A senha do cliente não foi informada");
 		}
-		if(clienteDTO.getClienteEmail() == null){
+		if (clienteDTO.getClienteEmail() == null) {
 			throw new ClienteException("O e-mail do cliente não foi informado");
 		}
-		if(clienteDTO.getClienteEnderecoCompleto() == null){
+		if (clienteDTO.getClienteEnderecoCompleto() == null) {
 			throw new ClienteException("O endereço do cliente não foi informado");
 		}
 		cliente.setClienteNome(clienteDTO.getClienteNome());
@@ -139,14 +137,13 @@ public class ClienteService {
 
 	}
 
-
-	public List<ClienteDTO> buscarTodos(){
+	public List<ClienteDTO> buscarTodos() {
 		List<Cliente> listaClienteModel = clienteRepository.findAll();
 		List<ClienteDTO> listaClienteDTO = new ArrayList<>();
 
-		for(Cliente cliente : listaClienteModel){
+		for (Cliente cliente : listaClienteModel) {
 			ClienteDTO clienteDTO = new ClienteDTO();
-			transformarModelEmDTO(cliente,clienteDTO);
+			transformarModelEmDTO(cliente, clienteDTO);
 			listaClienteDTO.add(clienteDTO);
 		}
 
@@ -157,11 +154,11 @@ public class ClienteService {
 	public void salvarListaCLiente(List<ClienteDTO> listaClienteDTO) throws ClienteException {
 
 		List<Cliente> listaCliente = new ArrayList<>();
-		for (ClienteDTO clienteDTO : listaClienteDTO){
+		for (ClienteDTO clienteDTO : listaClienteDTO) {
 			Cliente cliente = new Cliente();
 			transformarDTOEmModel(clienteDTO, cliente);
 			listaCliente.add(cliente);
 		}
-			clienteRepository.saveAll(listaCliente);
+		clienteRepository.saveAll(listaCliente);
 	}
 }

@@ -1,6 +1,5 @@
 package org.serratec.trabalho.api.esquadrao6.controller;
 
-
 import org.serratec.trabalho.api.esquadrao6.dto.MovimentacaoItemDTO;
 import org.serratec.trabalho.api.esquadrao6.dto.RelatorioDTO;
 import org.serratec.trabalho.api.esquadrao6.exception.EmailException;
@@ -17,23 +16,20 @@ import java.util.List;
 @RequestMapping("/movimentacaoItem")
 public class MovimentacaoItemController {
 
-    @Autowired
-    MovimentacaoItemService movimentacaoItemService;
+	@Autowired
+	MovimentacaoItemService movimentacaoItemService;
 
-    //CRUD
+	// CRUD
+	@PostMapping("/movimentar")
+	public ResponseEntity<String> movimentarProduto(@RequestBody MovimentacaoItemDTO dtoMovItem)
+			throws MessagingException, EmailException, MovimentacaoItemException {
+		return ResponseEntity.ok(movimentacaoItemService.movimentarProduto(dtoMovItem));
+	}
 
-    //Movimentações da loja
-    @PostMapping("/movimentar")
-    public ResponseEntity<String> movimentarProduto(@RequestBody MovimentacaoItemDTO dtoMovItem) throws MessagingException, EmailException, MovimentacaoItemException {
-       return ResponseEntity.ok(movimentacaoItemService.movimentarProduto(dtoMovItem));
-    }
-
-
-    //Relatórios
-    @GetMapping("/relatorio/maisVendidos")
-    public List<RelatorioDTO> relatorioProdutosMaisVendidos() {
-        return movimentacaoItemService.relatorioProdutosMaisVendidos();
-    }
-
+	// Relatórios
+	@GetMapping("/relatorio/maisVendidos")
+	public List<RelatorioDTO> relatorioProdutosMaisVendidos() {
+		return movimentacaoItemService.relatorioProdutosMaisVendidos();
+	}
 
 }

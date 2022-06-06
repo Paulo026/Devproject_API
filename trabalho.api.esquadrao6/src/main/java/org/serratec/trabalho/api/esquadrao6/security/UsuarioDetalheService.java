@@ -1,6 +1,5 @@
 package org.serratec.trabalho.api.esquadrao6.security;
 
-
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -14,16 +13,16 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UsuarioDetalheService implements UserDetailsService{
+public class UsuarioDetalheService implements UserDetailsService {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	
+
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
-		Optional<Usuario> usuario = usuarioRepository.buscarPorLogin(username); 
-		
-		if(usuario.isPresent()) {
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Optional<Usuario> usuario = usuarioRepository.buscarPorLogin(username);
+
+		if (usuario.isPresent()) {
 			Usuario u = usuario.get();
 			return new User(u.getUsername(), u.getPassword(), new ArrayList<>());
 		}

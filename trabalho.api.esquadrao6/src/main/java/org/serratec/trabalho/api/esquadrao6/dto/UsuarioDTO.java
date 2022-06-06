@@ -8,9 +8,9 @@ public class UsuarioDTO implements Serializable {
 	private Integer idUsuario;
 	private String Username;
 	private String password;
-	
+
 	public UsuarioDTO() {
-		
+
 	}
 
 	public Integer getIdUsuario() {
@@ -36,6 +36,5 @@ public class UsuarioDTO implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
+
 }
