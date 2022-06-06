@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class ProdutoDTO implements Serializable {
-    //Atributos específicos da classe
+    
+	private static final long serialVersionUID = 1L;
+	//Atributos específicos da classe
     private Integer produtoId;
     private String produtoNome;
     private String produtoDescricao;
